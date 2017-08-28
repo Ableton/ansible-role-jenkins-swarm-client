@@ -1,38 +1,53 @@
-Role Name
-=========
+Jenkins Swarm Client Role
+=========================
 
-A brief description of the role goes here.
+This role installs and starts up the [Jenkins Swarm
+Client][jenkins-swarm-client] on a host, which will allow it to connect to a
+Jenkins master instance as a build node.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires Java 8 to be installed on the host.
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables must be defined before attempting to apply this role:
 
-Dependencies
-------------
+- `jenkins_master_url`: URL to the Jenkins master instance.
+- `jenkins_swarm_home`: Path to use for the Swarm Client home. Aside from
+  containing the Swarm Client software, this directory will also be used for the
+  build `workspace`.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role defines the following variables, which may be overridden if
+desired:
+
+- `jenkins_node_name`: The name of the node to display in Jenkins. Note that
+  Jenkins will add a unique postfix to this name. Default value is
+  `inventory_hostname`.
+- `jenkins_node_label`: A label to add to the node. Note that the Swarm Client
+  plugin will add the `swarm` label to all nodes.
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+- name: Get info for Jenkins master
+  hosts: "{{ host | default('nodes') }}"
+  tasks:
+    - set_fact:
+        jenkins_master_url: "{{ jenkins_protocol }}://{{ jenkins_host }}:{{ jenkins_port }}"
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- name: Provision Jenkins node
+  hosts: "{{ host | default('nodes') }}"
+  vars:
+    - jenkins_swarm_home: "/tmp/jenkins-node"
+  roles:
+    - ableton.jenkins-swarm-client
+```
 
-License
--------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[jenkins-swarm-client]: https://plugins.jenkins.io/swarm

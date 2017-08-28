@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Nik Reiman
+  description: Installs the Jenkins Swarm Client service
+  company: Ableton AG
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,7 +14,7 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
+  license: BSD
 
   min_ansible_version: 1.2
 
@@ -43,6 +43,19 @@ galaxy_info:
   #   - 1.0
   #   - 7
   #   - 99.99
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Mac OS X
+    versions:
+    - all
+  - name: Windows
+    versions:
+    - 7
+    - 8
+    - 8.1
+    - 10
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
