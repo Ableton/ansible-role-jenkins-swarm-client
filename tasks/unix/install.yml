@@ -1,0 +1,8 @@
+---
+- name: Include default variables
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
+- name: Ensure Jenkins working directory exists
+  file:
+    path: "{{ jenkins_swarm_home }}"
+    state: directory

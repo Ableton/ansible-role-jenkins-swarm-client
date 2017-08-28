@@ -1,0 +1,9 @@
+---
+- name: Install apt dependencies
+  become: true
+  become_user: root
+  become_method: sudo
+  action: apt name={{item}} state=present
+  with_items: "{{ jenkins_node_packages }}"
+
+- include: "{{ role_path }}/tasks/unix/install.yml"

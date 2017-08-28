@@ -1,0 +1,12 @@
+---
+- name: Include default variables
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
+# TODO: Can this file be combined with unix/install.yml?
+# It's exactly the same logic, except that the Windows one
+# uses the win_* modules. Maybe the generic "action" module
+# would solve this problem.
+- name: Ensure Jenkins working directory exists
+  win_file:
+    path: "{{ jenkins_swarm_home }}"
+    state: directory

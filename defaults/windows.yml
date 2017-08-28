@@ -1,0 +1,6 @@
+---
+java_exe: 'java.exe'
+jenkins_node_platform: 'win'
+jenkins_swarm_home: 'C:\Temp\jenkins-node'
+jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}\\{{ jenkins_swarm_jar }}"
+jenkins_swarm_service_name: 'Jenkins swarm client'

@@ -1,0 +1,6 @@
+---
+- name: Install homebrew dependencies
+  action: homebrew name={{item}} state=present
+  with_items: "{{ jenkins_node_packages }}"
+
+- include: "{{ role_path }}/tasks/unix/install.yml"
