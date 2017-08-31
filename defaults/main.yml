@@ -3,3 +3,4 @@ jenkins_node_name: "{{ inventory_hostname }}"
 jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
 jenkins_swarm_port: 4666
+jenkins_swarm_service_name: 'Jenkins Swarm Client'
