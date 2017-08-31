@@ -6,3 +6,8 @@
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
+
+- name: Write labels to file
+  template:
+    src: "{{ role_path }}/files/labels.j2"
+    dest: "{{ jenkins_label_file }}"
