@@ -15,3 +15,38 @@
   win_template:
     src: "{{ role_path }}/files/labels.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
+
+- name: Copy swarm plugin client
+  win_copy:
+    src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
+    dest: "{{ jenkins_swarm_jar_path }}"
+
+# TODO: This can be replaced with a chocolatey package
+# Also, don't forget to document that in the role's meta.yml file
+- name: Copy NSSM
+  win_copy:
+    src: "{{ role_path }}/files/nssm.exe"
+    dest: "{{ jenkins_swarm_home }}\\nssm.exe"
+
+# TODO: Is this really necessary?
+# I recall that NSSM would freak out if you tried to create a service with
+# the same name, I don't think that it supports overwriting a service in
+# this manner. That is bad news if the arguments should change between
+# deployments.
+- name: Remove Windows service
+  win_service:
+    name: "{{ jenkins_swarm_service_name }}"
+    state: absent
+  ignore_errors: true
+
+- name: Create Windows service with NSSM
+  win_shell: >
+    {{ jenkins_swarm_home }}\\nssm.exe install \
+      '{{ jenkins_swarm_service_name }}' \
+      {{ jenkins_swarm_cmd }}
+
+- name: Set service startup directory
+  win_shell: >
+    {{ jenkins_swarm_home }}\\nssm.exe set \
+      '{{ jenkins_swarm_service_name }}' \
+      AppDirectory  {{ jenkins_swarm_home }}
