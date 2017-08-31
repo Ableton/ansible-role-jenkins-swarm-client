@@ -1,2 +1,7 @@
 ---
-- include: "{{ role_path }}/tasks/unix/swarm-client.yml"
+- name: Include default variables
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
+- name: Run swarm client launcher script
+  shell: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
+  async: 1

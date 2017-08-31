@@ -1,2 +1,4 @@
 ---
-- include: "{{ role_path }}/tasks/unix/shutdown.yml"
+- name: Kill Jenkins swarm client
+  command: pkill -f "java -jar .*swarm-client-.*.jar"
+  ignore_errors: true
