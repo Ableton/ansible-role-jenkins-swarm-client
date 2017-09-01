@@ -6,10 +6,20 @@
 - name: Run installation tasks common to Unix-like systems
   include: "{{ role_path }}/tasks/unix/install.yml"
 
-- name: Create Jenkins swarm client launcher script
-  copy:
-    dest: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
-    mode: 0755
-    content: |
-      #!/bin/sh
-      {{ jenkins_swarm_cmd }} &
+- set_fact:
+    jenkins_swarm_cmd_arguments: ""
+
+- name: Build plist program arguments
+  set_fact:
+    jenkins_swarm_cmd_arguments: >
+      {{ jenkins_swarm_cmd_arguments }}
+      <string>{{ item }}</string>
+  with_items: "{{ jenkins_swarm_cmd }}"
+
+- name: Ensure LaunchDaemon plist file exists
+  become: true
+  become_user: root
+  become_method: sudo
+  template:
+    src: "{{ role_path }}/files/{{ jenkins_swarm_client_ident }}.plist.j2"
+    dest: "{{ jenkins_swarm_daemon_plist }}"
