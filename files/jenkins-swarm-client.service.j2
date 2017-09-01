@@ -3,7 +3,7 @@ Description={{ jenkins_swarm_service_name }}
 After=network.target
 
 [Service]
-ExecStart={{ jenkins_swarm_cmd }}
+ExecStart={{ jenkins_swarm_cmd | join(" ") }}
 ExecStop=/usr/bin/pkill -f java
 Restart=on-abort
 Type=simple
