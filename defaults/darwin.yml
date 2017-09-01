@@ -1,6 +1,2 @@
 ---
-java_exe: 'java'
 jenkins_node_platform: 'mac'
-jenkins_swarm_home: '/tmp/jenkins-node'
-jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}/{{ jenkins_swarm_jar }}"
-jenkins_swarm_labels_file: "{{ jenkins_swarm_home }}/node-labels.txt"
