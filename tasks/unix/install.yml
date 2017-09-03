@@ -9,7 +9,7 @@
 
 - name: Write labels to file
   template:
-    src: "{{ role_path }}/files/labels.j2"
+    src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
 
 - name: Copy Swarm Client jar
