@@ -14,4 +14,4 @@
 - name: Write labels to file
   win_template:
     src: "{{ role_path }}/files/labels.j2"
-    dest: "{{ jenkins_label_file }}"
+    dest: "{{ jenkins_swarm_labels_file }}"
