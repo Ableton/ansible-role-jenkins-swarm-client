@@ -1,2 +1,0 @@
----
-- include: "{{ role_path }}/tasks/unix/swarm-client.yml"

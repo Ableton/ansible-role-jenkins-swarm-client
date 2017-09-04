@@ -1,2 +1,6 @@
 ---
-- include: "{{ role_path }}/tasks/unix/shutdown.yml"
+- name: Ensure Jenkins Swarm Client service is stopped
+  systemd:
+    name: jenkins-swarm-client
+    state: stopped
+  ignore_errors: true

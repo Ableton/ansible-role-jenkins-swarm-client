@@ -1,0 +1,9 @@
+---
+- name: Include default variables
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
+- name: Start Windows service
+  win_service:
+    name: "{{ jenkins_swarm_service_name }}"
+    start_mode: auto
+    state: started

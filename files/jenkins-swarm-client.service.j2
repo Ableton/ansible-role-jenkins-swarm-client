@@ -1,0 +1,17 @@
+[Unit]
+Description={{ jenkins_swarm_service_name }}
+After=network.target
+
+[Service]
+ExecStart={{ jenkins_swarm_cmd | join(" ") }}
+ExecStop=/usr/bin/pkill -f java
+# TODO: This requires https://github.com/jenkinsci/swarm-plugin/pull/55
+# ExecStop=/usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
+# PIDFile={{ jenkins_swarm_pid_file }}
+Restart=on-abort
+Type=simple
+User={{ ansible_user }}
+WorkingDirectory={{ jenkins_swarm_home }}
+
+[Install]
+WantedBy=multi-user.target

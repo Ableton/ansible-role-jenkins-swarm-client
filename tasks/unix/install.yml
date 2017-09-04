@@ -1,6 +1,6 @@
 ---
-- name: Include default variables
-  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- include_vars: "{{ role_path }}/defaults/unix.yml"
 
 - name: Ensure Jenkins working directory exists
   file:
@@ -9,5 +9,10 @@
 
 - name: Write labels to file
   template:
-    src: "{{ role_path }}/files/labels.j2"
-    dest: "{{ jenkins_label_file }}"
+    src: "{{ role_path }}/files/labels.txt.j2"
+    dest: "{{ jenkins_swarm_labels_file }}"
+
+- name: Copy Swarm Client jar
+  copy:
+    src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
+    dest: "{{ jenkins_swarm_jar_path }}"

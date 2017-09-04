@@ -2,9 +2,8 @@
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 - include_vars: "{{ role_path }}/defaults/unix.yml"
 
-- name: Kill Jenkins swarm client
+- name: Run swarm client launcher script
   become: true
   become_user: root
   become_method: sudo
-  shell: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
-  ignore_errors: true
+  shell: "launchctl load {{ jenkins_swarm_daemon_plist }}"

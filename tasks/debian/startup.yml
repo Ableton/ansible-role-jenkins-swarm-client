@@ -1,0 +1,8 @@
+---
+- name: Ensure Jenkins Swarm Client service is started
+  become: true
+  become_user: root
+  become_method: sudo
+  systemd:
+    name: jenkins-swarm-client
+    state: started
