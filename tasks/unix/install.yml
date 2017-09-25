@@ -2,6 +2,25 @@
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 - include_vars: "{{ role_path }}/defaults/unix.yml"
 
+- name: Ensure Jenkins Swarm group exists
+  become: true
+  become_user: root
+  become_method: sudo
+  group:
+    name: "{{ jenkins_swarm_group }}"
+    state: present
+
+- name: Ensure Jenkins Swarm user exists
+  become: true
+  become_user: root
+  become_method: sudo
+  user:
+    name: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
+    home: "{{ jenkins_swarm_home }}"
+    shell: "/bin/false"
+    state: present
+
 - name: Ensure Jenkins working directory exists
   file:
     path: "{{ jenkins_swarm_home }}"
