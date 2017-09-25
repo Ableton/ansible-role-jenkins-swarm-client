@@ -22,6 +22,9 @@
     state: present
 
 - name: Ensure Jenkins working directory exists
+  become: true
+  become_user: root
+  become_method: sudo
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
@@ -30,6 +33,9 @@
     mode: 0755
 
 - name: Write labels to file
+  become: true
+  become_user: root
+  become_method: sudo
   template:
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
@@ -37,6 +43,9 @@
     group: "{{ jenkins_swarm_group }}"
 
 - name: Copy Swarm Client jar
+  become: true
+  become_user: root
+  become_method: sudo
   copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
