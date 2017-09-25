@@ -25,13 +25,20 @@
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
+    mode: 0755
 
 - name: Write labels to file
   template:
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
 
 - name: Copy Swarm Client jar
   copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
