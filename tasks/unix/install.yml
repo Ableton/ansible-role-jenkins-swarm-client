@@ -2,17 +2,52 @@
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 - include_vars: "{{ role_path }}/defaults/unix.yml"
 
+- name: Ensure Jenkins Swarm group exists
+  become: true
+  become_user: root
+  become_method: sudo
+  group:
+    name: "{{ jenkins_swarm_group }}"
+    state: present
+
+- name: Ensure Jenkins Swarm user exists
+  become: true
+  become_user: root
+  become_method: sudo
+  user:
+    name: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
+    home: "{{ jenkins_swarm_home }}"
+    shell: "/bin/false"
+    state: present
+
 - name: Ensure Jenkins working directory exists
+  become: true
+  become_user: root
+  become_method: sudo
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
+    mode: 0755
 
 - name: Write labels to file
+  become: true
+  become_user: root
+  become_method: sudo
   template:
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
 
 - name: Copy Swarm Client jar
+  become: true
+  become_user: root
+  become_method: sudo
   copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
+    owner: "{{ jenkins_swarm_owner }}"
+    group: "{{ jenkins_swarm_group }}"
