@@ -10,7 +10,7 @@ ExecStop=/usr/bin/pkill -f java
 # PIDFile={{ jenkins_swarm_pid_file }}
 Restart=on-abort
 Type=simple
-User={{ jenkins_swarm_owner }}
+User={{ jenkins_config_owner }}
 WorkingDirectory={{ jenkins_swarm_home }}
 
 [Install]

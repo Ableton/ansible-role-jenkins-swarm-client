@@ -7,7 +7,7 @@
   become_user: root
   become_method: sudo
   group:
-    name: "{{ jenkins_swarm_group }}"
+    name: "{{ jenkins_config_group }}"
     state: present
 
 - name: Ensure Jenkins Swarm user exists
@@ -15,8 +15,8 @@
   become_user: root
   become_method: sudo
   user:
-    name: "{{ jenkins_swarm_owner }}"
-    group: "{{ jenkins_swarm_group }}"
+    name: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
     home: "{{ jenkins_swarm_home }}"
     shell: "/bin/false"
     state: present
@@ -28,8 +28,8 @@
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
-    owner: "{{ jenkins_swarm_owner }}"
-    group: "{{ jenkins_swarm_group }}"
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
     mode: 0755
 
 - name: Write labels to file
@@ -39,8 +39,8 @@
   template:
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
-    owner: "{{ jenkins_swarm_owner }}"
-    group: "{{ jenkins_swarm_group }}"
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
 
 - name: Copy Swarm Client jar
   become: true
@@ -49,5 +49,5 @@
   copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
-    owner: "{{ jenkins_swarm_owner }}"
-    group: "{{ jenkins_swarm_group }}"
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
