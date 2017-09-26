@@ -17,8 +17,6 @@
   user:
     name: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
-    home: "{{ jenkins_swarm_home }}"
-    shell: "/bin/false"
     state: present
 
 - name: Ensure Jenkins working directory exists
