@@ -7,7 +7,7 @@
   with_items: "{{ jenkins_node_packages }}"
 
 - name: Run installation tasks common to Unix-like systems
-  include: "{{ role_path }}/tasks/unix/install.yml"
+  include_tasks: "{{ role_path }}/tasks/unix/install.yml"
 
 - name: Ensure systemd service file exists
   become: true
