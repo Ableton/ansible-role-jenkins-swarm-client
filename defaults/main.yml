@@ -1,9 +1,17 @@
 ---
+# User that the Swarm Client service is run under.
 jenkins_config_owner: 'jenkins'
+# Group that the Swarm Client user belongs to.
 jenkins_config_group: 'jenkins'
 
+# The name assigned to this node, which is shown to the user in the Jenkins
+# master. Note that the Jenkins Swarm plugin will append a unique 8-character
+# hexadecimal identifier to the end of this value.
 jenkins_node_name: "{{ inventory_hostname }}"
+# The label for this node.
 jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
+# Port that the Swarm Client should run on.
 jenkins_swarm_port: 4666
+# String description of the service which manages the Swarm Client.
 jenkins_swarm_service_name: 'Jenkins Swarm Client'
