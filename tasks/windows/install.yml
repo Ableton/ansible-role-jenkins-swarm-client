@@ -2,6 +2,10 @@
 - name: Include default variables
   include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
+- name: Install chocolatey packages
+  action: win_chocolatey name={{item}} state=present
+  with_items: "{{ jenkins_node_packages }}"
+
 # TODO: Can this file be combined with unix/install.yml?
 # It's exactly the same logic, except that the Windows one
 # uses the win_* modules. Maybe the generic "action" module
