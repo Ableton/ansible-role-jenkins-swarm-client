@@ -2,7 +2,7 @@
 - name: Include default variables
   include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
-- name: Install chocolatey packages
+- name: Install Chocolatey packages
   action: win_chocolatey name={{item}} state=present
   with_items: "{{ jenkins_node_packages }}"
 
@@ -25,13 +25,6 @@
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
 
-# TODO: This can be replaced with a chocolatey package
-# Also, don't forget to document that in the role's meta.yml file
-- name: Copy NSSM
-  win_copy:
-    src: "{{ role_path }}/files/nssm.exe"
-    dest: "{{ jenkins_swarm_home }}\\nssm.exe"
-
 # TODO: Is this really necessary?
 # I recall that NSSM would freak out if you tried to create a service with
 # the same name, I don't think that it supports overwriting a service in
@@ -45,12 +38,12 @@
 
 - name: Create Windows service with NSSM
   win_shell: >
-    {{ jenkins_swarm_home }}\\nssm.exe install \
+    nssm.exe install \
       '{{ jenkins_swarm_service_name }}' \
       {{ jenkins_swarm_cmd | join(" ") }}
 
 - name: Set service startup directory
   win_shell: >
-    {{ jenkins_swarm_home }}\\nssm.exe set \
+    nssm.exe set \
       '{{ jenkins_swarm_service_name }}' \
       AppDirectory  {{ jenkins_swarm_home }}
