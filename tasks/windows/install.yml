@@ -2,7 +2,7 @@
 - name: Include default variables
   include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
-- name: Install chocolatey packages
+- name: Install Chocolatey packages
   action: win_chocolatey name={{item}} state=present
   with_items: "{{ jenkins_node_packages }}"
 
