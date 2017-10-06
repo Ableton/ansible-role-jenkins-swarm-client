@@ -4,5 +4,7 @@ java_exe: '/usr/bin/java'
 jenkins_swarm_home: '/var/jenkins-node'
 
 jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}/{{ jenkins_swarm_jar }}"
+
 jenkins_swarm_labels_file: "{{ jenkins_swarm_home }}/node-labels.txt"
+
 jenkins_swarm_pid_file: "{{ jenkins_swarm_home }}/swarm-client.pid"
