@@ -3,8 +3,8 @@
   include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
 - name: Install Chocolatey packages
-  action: win_chocolatey name={{item}} state=present
-  with_items: "{{ jenkins_node_packages }}"
+  action: win_chocolatey name={{item.key}} state=present install_args={{item.value.install_args}} params={{item.value.params}}
+  with_dict: "{{ jenkins_node_packages }}"
 
 # TODO: Can this file be combined with unix/install.yml?
 # It's exactly the same logic, except that the Windows one
