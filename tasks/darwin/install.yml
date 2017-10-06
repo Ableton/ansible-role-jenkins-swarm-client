@@ -1,7 +1,7 @@
 ---
 - name: Install homebrew dependencies
-  action: homebrew name={{item}} state=present
-  with_items: "{{ jenkins_node_packages }}"
+  action: homebrew name={{item.key}} state=present
+  with_dict: "{{ jenkins_node_packages }}"
 
 - name: Run installation tasks common to Unix-like systems
   include_tasks: "{{ role_path }}/tasks/unix/install.yml"
