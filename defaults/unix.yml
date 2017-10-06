@@ -1,8 +1,15 @@
 ---
+# Path to Java executable
 java_exe: '/usr/bin/java'
 
+# Jenkins Swarm Client home directory
 jenkins_swarm_home: '/var/jenkins-node'
 
+# Destination path for the Swarm Client JAR file
 jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}/{{ jenkins_swarm_jar }}"
+
+# Where to create the labels file used by the Swarm Client
 jenkins_swarm_labels_file: "{{ jenkins_swarm_home }}/node-labels.txt"
+
+# Where to save a PID file for the Swarm Client process
 jenkins_swarm_pid_file: "{{ jenkins_swarm_home }}/swarm-client.pid"

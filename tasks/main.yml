@@ -1,4 +1,6 @@
 ---
 - include_tasks: "{{ ansible_os_family | lower }}/shutdown.yml"
+
 - include_tasks: "{{ ansible_os_family | lower }}/install.yml"
+
 - include_tasks: "{{ ansible_os_family | lower }}/startup.yml"

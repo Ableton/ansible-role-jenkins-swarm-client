@@ -1,6 +1,5 @@
 ---
-- name: Include default variables
-  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
 - name: Install Chocolatey packages
   action: win_chocolatey name={{item.key}} state=present install_args={{item.value.install_args}} params={{item.value.params}}
