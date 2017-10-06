@@ -1,5 +1,6 @@
 ---
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
 - include_vars: "{{ role_path }}/defaults/unix.yml"
 
 - name: Ensure Jenkins Swarm group exists
