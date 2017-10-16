@@ -3,6 +3,14 @@
 
 - include_vars: "{{ role_path }}/defaults/unix.yml"
 
+- name: Ensure Jenkins Swarm Client home directory exists
+  become: true
+  become_user: root
+  become_method: sudo
+  file:
+    path: "{{ jenkins_swarm_home }}"
+    state: directory
+
 - name: Ensure Jenkins Swarm group exists
   become: true
   become_user: root
@@ -22,7 +30,7 @@
     shell: "/bin/false"
     state: present
 
-- name: Ensure Jenkins working directory exists
+- name: Set correct ownership of Jenkins Swarm Client home directory
   become: true
   become_user: root
   become_method: sudo
