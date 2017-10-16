@@ -1,1 +1,6 @@
 ---
+- name: Accept Xcode license
+  become: true
+  become_user: root
+  become_method: sudo
+  shell: xcodebuild -license
