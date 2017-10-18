@@ -1,4 +1,9 @@
 ---
+- name: Sanity check Jenkins Swarm Client variable
+  fail:
+    msg: "The jenkins_swarm_home variable is undefined!"
+  when: jenkins_swarm_home == ""
+
 - include_tasks: "{{ ansible_os_family | lower }}/shutdown.yml"
 
 - include_tasks: "{{ ansible_os_family | lower }}/install.yml"
