@@ -13,6 +13,9 @@ jenkins_node_name: "{{ inventory_hostname }}"
 # The label for this node.
 jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
+# Jenkins Swarm Client home directory (must be defined!)
+jenkins_swarm_home: ''
+
 # Port that the Swarm Client should run on.
 jenkins_swarm_port: 4666
 
