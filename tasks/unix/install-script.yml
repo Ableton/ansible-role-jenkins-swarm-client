@@ -1,0 +1,18 @@
+---
+- name: Create Jenkins swarm client launcher script
+  become: true
+  become_user: root
+  become_method: sudo
+  copy:
+    dest: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
+    mode: 0755
+    content: |-
+      #!/bin/sh
+      {{ jenkins_swarm_cmd | join(" ") }} &
+
+- name: Run swarm client launcher script
+  become: true
+  become_user: root
+  become_method: sudo
+  shell: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
+  async: 1

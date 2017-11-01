@@ -9,20 +9,10 @@
 - name: Run installation tasks common to Unix-like systems
   include_tasks: "{{ role_path }}/tasks/unix/install.yml"
 
-- name: Ensure systemd service file exists
-  become: true
-  become_user: root
-  become_method: sudo
-  template:
-    src: "{{ role_path }}/files/jenkins-swarm-client.service.j2"
-    dest: "/etc/systemd/system/jenkins-swarm-client.service"
+- name: Install systemd service
+  include_tasks: "{{ role_path }}/tasks/debian/install-systemd.yml"
+  when: jenkins_swarm_use_script != true
 
-- name: Ensure systemd service runs at boot
-  become: true
-  become_user: root
-  become_method: sudo
-  systemd:
-    name: jenkins-swarm-client
-    enabled: true
-    daemon_reload: true
-    no_block: true
+- name: Create shell script launcher
+  include_tasks: "{{ role_path }}/tasks/unix/install-script.yml"
+  when: jenkins_swarm_use_script

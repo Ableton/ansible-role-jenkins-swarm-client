@@ -7,3 +7,4 @@
     name: jenkins-swarm-client
     state: stopped
   ignore_errors: true
+  when: jenkins_swarm_use_script != true

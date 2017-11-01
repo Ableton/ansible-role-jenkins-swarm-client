@@ -1,0 +1,18 @@
+---
+- name: Ensure systemd service file exists
+  become: true
+  become_user: root
+  become_method: sudo
+  template:
+    src: "{{ role_path }}/files/jenkins-swarm-client.service.j2"
+    dest: "/etc/systemd/system/jenkins-swarm-client.service"
+
+- name: Ensure systemd service runs at boot
+  become: true
+  become_user: root
+  become_method: sudo
+  systemd:
+    name: jenkins-swarm-client
+    enabled: true
+    daemon_reload: true
+    no_block: true
