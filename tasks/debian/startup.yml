@@ -6,3 +6,4 @@
   systemd:
     name: jenkins-swarm-client
     state: started
+  when: jenkins_swarm_use_script != true
