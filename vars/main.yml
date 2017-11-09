@@ -18,6 +18,5 @@ jenkins_swarm_cmd:
   - "{{ jenkins_swarm_home }}"
   - "-executors"
   - "1"
-  # TODO: These options require https://github.com/jenkinsci/swarm-plugin
-  # - "-pidFile"
-  # - "{{ jenkins_swarm_pid_file }}"
+  - "-pidFile"
+  - "{{ jenkins_swarm_pid_file }}"
