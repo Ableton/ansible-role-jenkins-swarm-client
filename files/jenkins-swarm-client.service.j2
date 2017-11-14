@@ -4,10 +4,8 @@ After=network.target
 
 [Service]
 ExecStart={{ jenkins_swarm_cmd | join(" ") }}
-ExecStop=/usr/bin/pkill -f java
-# TODO: This requires https://github.com/jenkinsci/swarm-plugin/pull/55
-# ExecStop=/usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
-# PIDFile={{ jenkins_swarm_pid_file }}
+ExecStop=/usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
+PIDFile={{ jenkins_swarm_pid_file }}
 Restart=on-abort
 Type=simple
 User={{ jenkins_config_owner }}
