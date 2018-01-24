@@ -1,0 +1,40 @@
+---
+- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+
+- name: Ensure Jenkins Swarm Client home directory exists
+  become: true
+  become_user: root
+  become_method: sudo
+  file:
+    path: "{{ jenkins_swarm_home }}"
+    state: directory
+
+- name: Ensure Jenkins Swarm group exists
+  become: true
+  become_user: root
+  become_method: sudo
+  group:
+    name: "{{ jenkins_config_group }}"
+    state: present
+
+- name: Ensure Jenkins Swarm user exists
+  become: true
+  become_user: root
+  become_method: sudo
+  user:
+    name: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+    home: "{{ jenkins_swarm_home }}"
+    shell: "/bin/false"
+    state: present
+
+- name: Set correct ownership of Jenkins Swarm Client home directory
+  become: true
+  become_user: root
+  become_method: sudo
+  file:
+    path: "{{ jenkins_swarm_home }}"
+    state: directory
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
+    mode: 0755
