@@ -17,7 +17,18 @@
     name: "{{ jenkins_config_group }}"
     state: present
 
-- name: Ensure Jenkins Swarm user exists
+# On some Unix versions, we can run into trouble when trying to run usermod when a
+# background task owned by the Jenkins user is running (specifically, on systems with
+# newer versions of systemd running). For that reason we see if the user exists and then
+# only create it if necessary.
+# This means that the Jenkins user should *not* be created independently of Ansible,
+# otherwise the other user attributes below will not be properly set.
+- name: See whether Jenkins user exists
+  shell: "id -u {{ jenkins_config_owner }}"
+  ignore_errors: true
+  register: test_jenkins_user
+
+- name: Create Jenkins Swarm user
   become: true
   become_user: root
   become_method: sudo
@@ -27,6 +38,7 @@
     home: "{{ jenkins_swarm_home }}"
     shell: "/bin/false"
     state: present
+  when: test_jenkins_user.failed
 
 - name: Set correct ownership of Jenkins Swarm Client home directory
   become: true
