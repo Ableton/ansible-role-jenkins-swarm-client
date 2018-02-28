@@ -1,6 +1,10 @@
 ---
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
+- name: Check if reboot is necessary
+  set_fact:
+    chocolatey_reboot_necessary: false
+
 - name: Install Chocolatey packages
   win_chocolatey:
     name: "{{ item.key }}"
@@ -8,6 +12,25 @@
     params: "{{ item.value.params }}"
     state: present
   with_dict: "{{ jenkins_node_packages }}"
+  register: chocolatey_result
+  # Error code 3010 means that a reboot is necessary following installation
+  # of the package.
+  failed_when: chocolatey_result.rc != 0 and chocolatey_result.rc != 3010
+
+- name: Check if reboot is necessary
+  set_fact:
+    chocolatey_reboot_necessary: true
+  when: item.rc == 3010
+  with_items: "{{ chocolatey_result.results }}"
+
+- name: Reboot Windows host
+  win_shell: Restart-Computer -Force
+  when: chocolatey_reboot_necessary
+
+- name: Wait for host to come back online
+  wait_for_connection:
+    delay: 10
+  when: chocolatey_reboot_necessary
 
 # TODO: Can this file be combined with unix/install.yml?
 # It's exactly the same logic, except that the Windows one
