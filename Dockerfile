@@ -9,7 +9,7 @@ RUN apt install -y openssh-server sudo python
 EXPOSE 22
 RUN mkdir /var/run/sshd
 
-RUN useradd -d $jenkins_swarm_home -m -G ssh,sudo -s /bin/bash $jenkins_user
-RUN echo "$jenkins_user:$jenkins_password" | chpasswd
+RUN useradd -d "${jenkins_swarm_home:?}" -m -G ssh,sudo -s /bin/bash "${jenkins_user:?}"
+RUN echo "${jenkins_user:?}:${jenkins_password:?}" | chpasswd
 
 CMD /usr/sbin/sshd && sleep infinity
