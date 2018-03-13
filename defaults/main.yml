@@ -5,6 +5,10 @@ jenkins_config_owner: 'jenkins'
 # Group that the Swarm Client user belongs to.
 jenkins_config_group: 'jenkins'
 
+# Extra labels to assign to the node, other than the node's inventory_hostname and the
+# jenkins_node_label value below.
+jenkins_node_extra_labels: ''
+
 # The name assigned to this node, which is shown to the user in the Jenkins master. Note
 # that the Jenkins Swarm plugin will append a unique 8-character hexadecimal identifier to
 # the end of this value.
