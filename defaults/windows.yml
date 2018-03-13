@@ -1,7 +1,7 @@
 ---
-# Name of Java executable. Using an absolute path for this value is *not*
-# recommended, since Java updates can change the location of this executable.
-# Instead, it is better to let Java modify the system path accordingly.
+# Name of Java executable. Using an absolute path for this value is *not* recommended,
+# since Java updates can change the location of this executable. Instead, it is better to
+# let Java modify the system path accordingly.
 java_exe: 'java.exe'
 
 # Node platform name, which is used in the labels set on the node
