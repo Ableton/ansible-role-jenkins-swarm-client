@@ -25,3 +25,13 @@
     dest: "{{ jenkins_swarm_jar_path }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
+
+- name: Copy logging properties file
+  become: true
+  become_user: root
+  become_method: sudo
+  copy:
+    src: "{{ role_path }}/files/logging.properties"
+    dest: "{{ jenkins_swarm_logging_properties }}"
+    owner: "{{ jenkins_config_owner }}"
+    group: "{{ jenkins_config_group }}"
