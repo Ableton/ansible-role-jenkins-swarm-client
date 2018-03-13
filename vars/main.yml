@@ -1,6 +1,7 @@
 ---
 jenkins_swarm_cmd:
   - "{{ java_exe }}"
+  - "-D'java.util.logging.config.file={{ jenkins_swarm_logging_properties }}'"
   - "-jar"
   - "{{ jenkins_swarm_jar_path }}"
   - "-master"
