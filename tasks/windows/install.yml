@@ -5,6 +5,11 @@
   set_fact:
     chocolatey_reboot_necessary: false
 
+- name: Ensure chocolatey is installed
+  win_chocolatey:
+    name: chocolatey
+    state: present
+
 - name: Install Chocolatey packages
   win_chocolatey:
     name: "{{ item.key }}"
