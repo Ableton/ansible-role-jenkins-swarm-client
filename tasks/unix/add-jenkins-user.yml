@@ -3,16 +3,12 @@
 
 - name: Ensure Jenkins Swarm Client home directory exists
   become: true
-  become_user: root
-  become_method: sudo
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
 
 - name: Ensure Jenkins Swarm group exists
   become: true
-  become_user: root
-  become_method: sudo
   group:
     name: "{{ jenkins_config_group }}"
     state: present
@@ -30,8 +26,6 @@
 
 - name: Create Jenkins Swarm user
   become: true
-  become_user: root
-  become_method: sudo
   user:
     name: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
@@ -42,8 +36,6 @@
 
 - name: Set correct ownership of Jenkins Swarm Client home directory
   become: true
-  become_user: root
-  become_method: sudo
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
