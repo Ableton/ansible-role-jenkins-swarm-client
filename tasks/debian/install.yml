@@ -1,8 +1,6 @@
 ---
 - name: Install apt dependencies
   become: true
-  become_user: root
-  become_method: sudo
   action: apt name={{item.key}} state=present
   with_dict: "{{ jenkins_node_packages }}"
 

@@ -8,8 +8,6 @@
 
 - name: Write labels to file
   become: true
-  become_user: root
-  become_method: sudo
   template:
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
@@ -18,8 +16,6 @@
 
 - name: Copy Swarm Client jar
   become: true
-  become_user: root
-  become_method: sudo
   copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
@@ -28,8 +24,6 @@
 
 - name: Copy logging properties file
   become: true
-  become_user: root
-  become_method: sudo
   copy:
     src: "{{ role_path }}/files/logging.properties"
     dest: "{{ jenkins_swarm_logging_properties }}"

@@ -18,8 +18,6 @@
 
 - name: Ensure LaunchDaemon plist file exists
   become: true
-  become_user: root
-  become_method: sudo
   template:
     src: "{{ role_path }}/files/{{ jenkins_swarm_client_ident }}.plist.j2"
     dest: "{{ jenkins_swarm_daemon_plist }}"

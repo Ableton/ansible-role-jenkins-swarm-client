@@ -5,6 +5,4 @@
 
 - name: Run swarm client launcher script
   become: true
-  become_user: root
-  become_method: sudo
   shell: "launchctl load {{ jenkins_swarm_daemon_plist }}"
