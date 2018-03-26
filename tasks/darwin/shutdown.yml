@@ -5,7 +5,5 @@
 
 - name: Kill Jenkins swarm client
   become: true
-  become_user: root
-  become_method: sudo
   shell: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true
