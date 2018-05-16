@@ -1,7 +1,10 @@
 ---
 - name: Install apt dependencies
   become: true
-  action: apt name={{item.key}} state=present
+  apt:
+    name: "{{ item.key }}"
+    state: present
+    force: true
   with_dict: "{{ jenkins_node_packages }}"
 
 - name: Run installation tasks common to Unix-like systems
