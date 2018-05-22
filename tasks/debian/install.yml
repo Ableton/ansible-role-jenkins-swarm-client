@@ -1,4 +1,11 @@
 ---
+- name: Update and clean apt packages
+  become: true
+  apt:
+    autoclean: true
+    autoremove: true
+    update_cache: true
+
 - name: Install apt dependencies
   become: true
   apt:
