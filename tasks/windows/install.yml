@@ -1,6 +1,9 @@
 ---
 - include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
+- name: Run user setup tasks
+  include_tasks: "{{ role_path }}/tasks/windows/add-jenkins-user.yml"
+
 - name: Check if reboot is necessary
   set_fact:
     chocolatey_reboot_necessary: false
@@ -88,3 +91,9 @@
     nssm.exe set \
       '{{ jenkins_swarm_service_name }}' \
       AppDirectory {{ jenkins_swarm_home }}
+
+- name: Set Jenkins Swarm Client to run as Jenkins user
+  win_shell: >
+    nssm.exe set \
+      '{{ jenkins_swarm_service_name }}' \
+      ObjectName .\\{{ jenkins_config_owner }} {{ jenkins_user_password }}
