@@ -87,4 +87,4 @@
   win_shell: >
     nssm.exe set \
       '{{ jenkins_swarm_service_name }}' \
-      AppDirectory  {{ jenkins_swarm_home }}
+      AppDirectory {{ jenkins_swarm_home }}
