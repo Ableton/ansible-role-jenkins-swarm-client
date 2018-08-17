@@ -32,3 +32,6 @@ jenkins_swarm_service_name: 'Jenkins Swarm Client'
 # If true, then start the Swarm Client from a shell script. This only applies to Debian
 # hosts, and is useful for environments such as Docker where systemd is not available.
 jenkins_swarm_use_script: false
+
+# Password for Jenkins service user (only used on Windows).
+jenkins_user_password: ""
