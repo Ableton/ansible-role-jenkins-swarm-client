@@ -1,1 +1,7 @@
 ---
+- name: Create Jenkins Swarm user
+  win_user:
+    name: "{{ jenkins_config_owner }}"
+    password: "{{ jenkins_user_password }}"
+    state: present
+    update_password: on_create
