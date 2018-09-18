@@ -18,6 +18,7 @@
     name: "{{ item.key }}"
     install_args: "{{ item.value.install_args | default('') }}"
     params: "{{ item.value.params | default('') }}"
+    allow_prerelease: "{{ item.value.allow_prerelease | default(false) }}"
     state: present
   with_dict: "{{ jenkins_node_packages }}"
   register: chocolatey_result
