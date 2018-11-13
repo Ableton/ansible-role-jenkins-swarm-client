@@ -1,13 +1,13 @@
 ---
 # User that the Swarm Client service is run under.
-jenkins_config_owner: 'jenkins'
+jenkins_config_owner: "jenkins"
 
 # Group that the Swarm Client user belongs to.
-jenkins_config_group: 'jenkins'
+jenkins_config_group: "jenkins"
 
 # Extra labels to assign to the node, other than the node's inventory_hostname and the
 # jenkins_node_label value below.
-jenkins_node_extra_labels: ''
+jenkins_node_extra_labels: ""
 
 # The name assigned to this node, which is shown to the user in the Jenkins master. Note
 # that the Jenkins Swarm plugin will append a unique 8-character hexadecimal identifier to
@@ -21,13 +21,13 @@ jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 jenkins_node_packages: []
 
 # Jenkins Swarm Client home directory (must be defined!)
-jenkins_swarm_home: ''
+jenkins_swarm_home: ""
 
 # Port that the Swarm Client should run on.
 jenkins_swarm_port: 4666
 
 # String description of the service which manages the Swarm Client.
-jenkins_swarm_service_name: 'Jenkins Swarm Client'
+jenkins_swarm_service_name: "Jenkins Swarm Client"
 
 # If true, then start the Swarm Client from a shell script. This only applies to Debian
 # hosts, and is useful for environments such as Docker where systemd is not available.

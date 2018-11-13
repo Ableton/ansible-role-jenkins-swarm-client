@@ -1,9 +1,9 @@
 ---
 # Node platform name, which is used in the labels set on the node
-jenkins_node_platform: 'mac'
+jenkins_node_platform: "mac"
 
 # LaunchDaemon service identifier
-jenkins_swarm_client_ident: 'org.jenkins-ci.plugins.swarm'
+jenkins_swarm_client_ident: "org.jenkins-ci.plugins.swarm"
 
 # LaunchDaemon plist file destination path
 jenkins_swarm_daemon_plist: "/Library/LaunchAgents/\
