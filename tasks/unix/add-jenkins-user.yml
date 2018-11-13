@@ -22,6 +22,7 @@
 - name: See whether Jenkins user exists
   shell: "id -u {{ jenkins_config_owner }}"
   ignore_errors: true
+  changed_when: false
   register: test_jenkins_user
 
 - name: Create Jenkins Swarm user
