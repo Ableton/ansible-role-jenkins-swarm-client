@@ -33,7 +33,7 @@
     home: "{{ jenkins_swarm_home }}"
     shell: "/bin/false"
     state: present
-  when: test_jenkins_user.failed
+  when: test_jenkins_user is failed
 
 - name: Set correct ownership of Jenkins Swarm Client home directory
   become: true
