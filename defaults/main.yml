@@ -18,7 +18,7 @@ jenkins_node_name: "{{ inventory_hostname }}"
 jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
 # List of packages which will be installed on the build node.
-jenkins_node_packages: []
+jenkins_node_packages: {}
 
 # Jenkins Swarm Client home directory (must be defined!)
 jenkins_swarm_home: ""
