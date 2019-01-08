@@ -17,7 +17,11 @@ jenkins_node_name: "{{ inventory_hostname }}"
 # The label for this node.
 jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
-# List of packages which will be installed on the build node.
+# Dictionary of packages which will be installed on the build node. This is a dictionary
+# rather than a list so that extra options can be specified per-package, which is
+# particularly useful for chocolatey packages on Windows.
+# Not all parameters for the apt/chocolatey/homebrew modules are supported. Please refer
+# to the tasks in <platform>/install.yml for supported keys.
 jenkins_node_packages: {}
 
 # Jenkins Swarm Client home directory (must be defined!)
