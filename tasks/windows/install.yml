@@ -44,10 +44,6 @@
     delay: 10
   when: chocolatey_reboot_necessary
 
-# TODO: Can this file be combined with unix/install.yml?
-# It's exactly the same logic, except that the Windows one
-# uses the win_* modules. Maybe the generic "action" module
-# would solve this problem.
 - name: Ensure Jenkins working directory exists
   win_file:
     path: "{{ jenkins_swarm_home }}"
@@ -58,7 +54,7 @@
     src: "{{ role_path }}/files/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
 
-- name: Copy swarm plugin client
+- name: Copy Swarm Client jar
   win_copy:
     src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
     dest: "{{ jenkins_swarm_jar_path }}"
