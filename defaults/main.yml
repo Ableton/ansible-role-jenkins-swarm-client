@@ -27,9 +27,6 @@ jenkins_node_packages: {}
 # Jenkins Swarm Client home directory (must be defined!)
 jenkins_swarm_home: ""
 
-# Port that the Swarm Client should run on.
-jenkins_swarm_port: 4666
-
 # String description of the service which manages the Swarm Client.
 jenkins_swarm_service_name: "Jenkins Swarm Client"
 
