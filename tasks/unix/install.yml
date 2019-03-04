@@ -14,10 +14,12 @@
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
 
-- name: Copy Swarm Client jar
+- name: Download Swarm Client JAR
   become: true
-  copy:
-    src: "{{ role_path }}/files/{{ jenkins_swarm_jar }}"
+  get_url:
+    url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client\
+      /{{ jenkins_swarm_client_version }}\
+      /swarm-client-{{ jenkins_swarm_client_version }}.jar"
     dest: "{{ jenkins_swarm_jar_path }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
