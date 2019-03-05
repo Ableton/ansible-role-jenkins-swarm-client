@@ -25,7 +25,7 @@ jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 jenkins_node_packages: {}
 
 # Version of the Jenkins Swarm Client to install.
-jenkins_swarm_client_version: "3.14"
+jenkins_swarm_client_version: "3.15"
 
 # Jenkins Swarm Client home directory (must be defined!)
 jenkins_swarm_home: ""
