@@ -14,6 +14,20 @@
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
 
+- name: Set fact for get_url Python interpreter
+  set_fact:
+    swarm_client_get_url_python: "python"
+
+# Older versions of macOS can have problems downloading from HTTPS websites thanks to
+# outdated OpenSSL versions. As a workaround, we force python3 for this task.
+# See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
+- name: Determine if get_url requires python3
+  set_fact:
+    swarm_client_get_url_python: "/usr/local/bin/python3"
+  when: >
+    ansible_os_family == "Darwin" and
+    ansible_distribution_version is version_compare('10.13', '<')
+
 - name: Download Swarm Client JAR
   become: true
   get_url:
@@ -23,6 +37,8 @@
     dest: "{{ jenkins_swarm_jar_path }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
+  vars:
+    ansible_python_interpreter: "{{ swarm_client_get_url_python }}"
 
 - name: Copy logging properties file
   become: true
