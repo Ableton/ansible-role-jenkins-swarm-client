@@ -4,4 +4,6 @@
     name: "{{ jenkins_config_owner }}"
     password: "{{ jenkins_user_password }}"
     state: present
+    password_expired: false
+    password_never_expires: true
     update_password: on_create
