@@ -9,3 +9,4 @@
   become: true
   command: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true
+  changed_when: false
