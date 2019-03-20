@@ -19,7 +19,7 @@
 
 - name: Install systemd service
   include_tasks: "{{ role_path }}/tasks/debian/install-systemd.yml"
-  when: jenkins_swarm_use_script != true
+  when: not jenkins_swarm_use_script
 
 - name: Create shell script launcher
   include_tasks: "{{ role_path }}/tasks/unix/install-script.yml"
