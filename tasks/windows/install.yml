@@ -1,5 +1,6 @@
 ---
-- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- name: Include platform-specific defaults
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
 - name: Run user setup tasks
   include_tasks: "{{ role_path }}/tasks/windows/add-jenkins-user.yml"
