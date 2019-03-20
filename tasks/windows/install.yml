@@ -13,6 +13,17 @@
     name: chocolatey
     state: present
 
+# TODO: Remove this after updating to Ansible > 2.7.9
+# This workaround fixes a problem with Ansible <= 2.7.9, since Chocolatey has changed the
+# way that it reports error codes. There is a fix in Ansible, but it hasn't been included
+# in a point release yet. See:
+# https://github.com/ansible/ansible/issues/53860#issuecomment-473431360
+# https://github.com/ansible/ansible/pull/53841
+- name: Disable enhanced exit codes for chocolatey
+  win_chocolatey_feature:
+    name: "useEnhancedExitCodes"
+    state: disabled
+
 - name: Install Chocolatey packages
   win_chocolatey:
     name: "{{ item.key }}"
