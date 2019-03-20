@@ -12,3 +12,4 @@
   become: true
   command: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
   async: 1
+  changed_when: false
