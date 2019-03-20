@@ -7,5 +7,5 @@
 
 - name: Kill Jenkins swarm client
   become: true
-  shell: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
+  command: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true

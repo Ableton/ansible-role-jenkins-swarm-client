@@ -21,7 +21,7 @@
 # This means that the Jenkins user should *not* be created independently of Ansible,
 # otherwise the other user attributes below will not be properly set.
 - name: See whether Jenkins user exists
-  shell: "id -u {{ jenkins_config_owner }}"
+  command: "id -u {{ jenkins_config_owner }}"
   ignore_errors: true
   changed_when: false
   register: test_jenkins_user

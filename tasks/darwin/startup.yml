@@ -7,4 +7,4 @@
 
 - name: Run swarm client launcher script
   become: true
-  shell: "launchctl load {{ jenkins_swarm_daemon_plist }}"
+  command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
