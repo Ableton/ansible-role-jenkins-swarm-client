@@ -1,9 +1,12 @@
 ---
-- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- name: Include platform-specific defaults
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
-- include_vars: "{{ role_path }}/defaults/unix.yml"
+- name: Include unix-specific defaults
+  include_vars: "{{ role_path }}/defaults/unix.yml"
 
 - name: Kill Jenkins swarm client
   become: true
-  shell: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
+  command: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true
+  changed_when: false

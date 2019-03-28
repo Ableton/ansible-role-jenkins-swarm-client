@@ -1,8 +1,11 @@
 ---
-- include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+- name: Include platform-specific defaults
+  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
 
-- include_vars: "{{ role_path }}/defaults/unix.yml"
+- name: Include unix-specific defaults
+  include_vars: "{{ role_path }}/defaults/unix.yml"
 
 - name: Run swarm client launcher script
   become: true
-  shell: "launchctl load {{ jenkins_swarm_daemon_plist }}"
+  command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
+  changed_when: false
