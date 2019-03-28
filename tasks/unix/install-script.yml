@@ -10,5 +10,6 @@
 
 - name: Run swarm client launcher script
   become: true
-  shell: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
+  command: "{{ jenkins_swarm_home }}/swarm-client-launcher.sh"
   async: 1
+  changed_when: false
