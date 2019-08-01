@@ -2,7 +2,7 @@
 # Name of Java executable. Using an absolute path for this value is *not* recommended,
 # since Java updates can change the location of this executable. Instead, it is better to
 # let Java modify the system path accordingly.
-java_exe: "java.exe"
+java_exe: "java.exe -javaagent:{{ jenkins_swarm_home }}\\file-leak-detector.jar=http=1999"
 
 # Node platform name, which is used in the labels set on the node
 jenkins_node_platform: "win"
