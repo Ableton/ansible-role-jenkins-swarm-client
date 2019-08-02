@@ -68,6 +68,7 @@
     url: "http://search.maven.org/remotecontent?filepath=org/kohsuke/file-leak-detector\
       /1.13/file-leak-detector-1.13-jar-with-dependencies.jar"
     dest: "{{ jenkins_swarm_home }}\\file-leak-detector.jar"
+  retries: 3
 
 - name: Copy logging properties file
   win_copy:
