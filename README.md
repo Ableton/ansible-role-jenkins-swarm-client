@@ -39,7 +39,7 @@ Example Playbook
   hosts: "{{ host | default('nodes') }}"
   tasks:
     - set_fact:
-        jenkins_master_url: "{{ jenkins_protocol }}://{{ jenkins_host }}:{{ jenkins_port }}"
+        jenkins_master_url: "http://jenkins.example.com"
 
 - name: Provision Jenkins node
   hosts: "{{ host | default('nodes') }}"
