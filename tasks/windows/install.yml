@@ -63,15 +63,6 @@
       /swarm-client-{{ jenkins_swarm_client_version }}.jar"
     dest: "{{ jenkins_swarm_jar_path }}"
 
-- name: Download leak detector JAR
-  win_get_url:
-    url: "http://search.maven.org/remotecontent?filepath=org/kohsuke/file-leak-detector\
-      /1.13/file-leak-detector-1.13-jar-with-dependencies.jar"
-    dest: "{{ jenkins_swarm_home }}\\file-leak-detector.jar"
-  register: leak_detector_jar
-  retries: 3
-  until: leak_detector_jar is success and leak_detector_jar.status_code == 200
-
 - name: Copy logging properties file
   win_copy:
     src: "{{ role_path }}/files/logging.properties"
