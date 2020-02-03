@@ -21,3 +21,4 @@ jenkins_swarm_cmd:
   - "1"
   - "-pidFile"
   - "{{ jenkins_swarm_pid_file }}"
+  - "{{ jenkins_swarm_extra_args | join(' ') }}"

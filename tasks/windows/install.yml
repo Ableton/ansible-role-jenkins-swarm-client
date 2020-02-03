@@ -85,7 +85,7 @@
   win_shell: >
     nssm.exe install \
       '{{ jenkins_swarm_service_name }}' \
-      {{ jenkins_swarm_cmd | join(" ") }}
+      {{ (jenkins_swarm_cmd + jenkins_swarm_extra_args) | join(" ") }}
 
 - name: Set service startup directory
   win_shell: >
