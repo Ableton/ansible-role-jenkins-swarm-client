@@ -9,3 +9,13 @@
   become: true
   command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
   changed_when: false
+  register: swarm_client_load
+
+- name: Check if swarm client service is running
+  become: true
+  command: "launchctl list {{ jenkins_swarm_client_ident }}"
+  changed_when: false
+  register: swarm_client_list
+  failed_when: swarm_client_list.rc != 0 or '"PID" =' not in swarm_client_list.stdout
+  when: "'service already loaded' not in swarm_client_load.stderr"
+  delay: 1
