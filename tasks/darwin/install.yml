@@ -19,14 +19,18 @@
 
 - name: Initialize jenkins_swarm_cmd_arguments fact
   set_fact:
-    jenkins_swarm_cmd_arguments: ""
+    jenkins_swarm_cmd_arguments: "<string>{{ java_exe }}</string>"
+
+- name: Assemble full command arguments
+  set_fact:
+    jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
 
 - name: Build plist program arguments
   set_fact:
     jenkins_swarm_cmd_arguments: >
       {{ jenkins_swarm_cmd_arguments }}
       <string>{{ jenkins_swarm_cmd_item }}</string>
-  with_items: "{{ jenkins_swarm_cmd }}"
+  with_items: "{{ jenkins_swarm_full_args }}"
   loop_control:
     loop_var: jenkins_swarm_cmd_item
 
