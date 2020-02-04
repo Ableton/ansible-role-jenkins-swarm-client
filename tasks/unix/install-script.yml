@@ -1,4 +1,8 @@
 ---
+- name: Assemble full command arguments
+  set_fact:
+    jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
+
 - name: Create Jenkins swarm client launcher script
   become: true
   copy:
@@ -6,7 +10,7 @@
     mode: 0755
     content: |-
       #!/bin/sh
-      {{ (jenkins_swarm_cmd + jenkins_swarm_extra_args) | join(" ") }} &
+      {{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }} &
 
 - name: Run swarm client launcher script
   become: true
