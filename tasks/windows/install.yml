@@ -24,8 +24,8 @@
     state: present
   with_dict: "{{ jenkins_node_packages }}"
   register: chocolatey_result
-  # Error code 3010 means that a reboot is necessary following installation
-  # of the package.
+  # Error code 3010 means that a reboot is necessary following installation of the
+  # package.
   failed_when: >
     chocolatey_result.rc is defined and
     chocolatey_result.rc != 0 and
@@ -68,24 +68,27 @@
     src: "{{ role_path }}/files/logging.properties"
     dest: "{{ jenkins_swarm_logging_properties }}"
 
-# It is necessary for us to remove and re-create this service since NSSM will
-# fail with an error when creating the service if it already exists. This
-# could be mitigated by adding "ignore_errors: true" to the service creation
-# step, but I would prefer to recreate the service rather than suppress any
-# errors which may occur while creating it. Also, we need to make sure that
-# if the arguments in jenkins_swarm_cmd change then they are added to the
-# NSSM service.
+# It is necessary for us to remove and re-create this service since NSSM will fail with an
+# error when creating the service if it already exists. This could be mitigated by adding
+# "ignore_errors: true" to the service creation step, but I would prefer to recreate the
+# service rather than suppress any errors which may occur while creating it. Also, we need
+# to make sure that if the arguments in jenkins_swarm_cmd change then they are added to
+# the NSSM service.
 - name: Remove Windows service
   win_service:
     name: "{{ jenkins_swarm_service_name }}"
     state: absent
   ignore_errors: true
 
+- name: Assemble full command arguments
+  set_fact:
+    jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
+
 - name: Create Windows service with NSSM
   win_shell: >
     nssm.exe install \
       '{{ jenkins_swarm_service_name }}' \
-      {{ (jenkins_swarm_cmd + jenkins_swarm_extra_args) | join(" ") }}
+      {{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }}
 
 - name: Set service startup directory
   win_shell: >
