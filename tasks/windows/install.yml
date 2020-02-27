@@ -84,17 +84,18 @@
   set_fact:
     jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
 
-- name: Create Windows service with NSSM
-  win_shell: >
-    nssm.exe install \
-      '{{ jenkins_swarm_service_name }}' \
-      {{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }}
+- name: Get absolute path to Java executable
+  win_shell:  "Get-Command {{ java_exe }} | Select-Object 'Source' | Format-Wide"
+  changed_when: false
+  register: get_command_java
 
-- name: Set service startup directory
-  win_shell: >
-    nssm.exe set \
-      '{{ jenkins_swarm_service_name }}' \
-      AppDirectory {{ jenkins_swarm_home }}
+- name: Create Windows service with NSSM
+  win_nssm:
+    name: "{{ jenkins_swarm_service_name }}"
+    application: "{{ get_command_java.stdout | trim }}"
+    arguments: "{{ jenkins_swarm_full_args }}"
+    description: "Jenkins Swarm Client"
+    working_directory: "{{ jenkins_swarm_home }}"
 
 - name: Set Jenkins Swarm Client to run as Jenkins user
   win_shell: >
