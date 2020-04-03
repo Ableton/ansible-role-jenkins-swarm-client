@@ -32,7 +32,7 @@
     name: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
     home: "{{ jenkins_swarm_home }}"
-    shell: "/bin/false"
+    shell: "/bin/bash"
     state: present
   when: test_jenkins_user is failed
 
