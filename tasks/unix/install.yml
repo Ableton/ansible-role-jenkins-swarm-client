@@ -1,9 +1,9 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Include unix-specific defaults
-  include_vars: "{{ role_path }}/defaults/unix.yml"
+  include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Run user setup tasks
   include_tasks: "{{ role_path }}/tasks/unix/add-jenkins-user.yml"
