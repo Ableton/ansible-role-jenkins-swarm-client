@@ -4,4 +4,7 @@
   systemd:
     name: jenkins-swarm-client
     state: started
+  # This is required or else molecule's idempotency test will fail. See:
+  # https://github.com/ansible-community/molecule/issues/2765
+  changed_when: false
   when: not jenkins_swarm_use_script
