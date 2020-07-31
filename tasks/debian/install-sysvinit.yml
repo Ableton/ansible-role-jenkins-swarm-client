@@ -1,0 +1,25 @@
+---
+- name: Assemble full command arguments
+  set_fact:
+    jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
+
+- name: Ensure daemon is installed
+  become: true
+  apt:
+    name: "daemon"
+    state: present
+
+- name: Generate Jenkins Swarm Client launcher script
+  become: true
+  template:
+    src: "jenkins-swarm-client-sysvinit.sh.j2"
+    dest: "/etc/init.d/jenkins-swarm-client"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: Install Jenkins Swarm Client service
+  become: true
+  service:
+    name: "jenkins-swarm-client"
+    enabled: true
