@@ -9,15 +9,3 @@
   # https://github.com/ansible-community/molecule/issues/2765
   changed_when: false
   when: not jenkins_swarm_use_script
-
-- name: See if Jenkins Swarm Client is running
-  slurp:
-    src: "{{ jenkins_swarm_home }}/swarm-client.pid"
-  ignore_errors: true
-  register: jenkins_swarm_client_pid
-  when: jenkins_swarm_use_script
-
-- name: Kill Jenkins Swarm Client
-  command: "kill {{ jenkins_swarm_client_pid['content'] | b64decode }}"
-  changed_when: false
-  when: jenkins_swarm_use_script and jenkins_swarm_client_pid is not failed

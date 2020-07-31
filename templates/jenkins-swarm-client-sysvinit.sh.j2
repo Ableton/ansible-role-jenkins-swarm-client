@@ -1,0 +1,46 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          jenkins-swarm-client
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: {{ jenkins_swarm_service_name }}
+### END INIT INFO
+
+RETVAL=0
+
+start() {
+  /usr/bin/daemon --name=jenkins-swarm-client --inherit \
+    --output=/var/log/jenkins-swarm-client.log -- \
+    {{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }}
+  RETVAL=$?
+}
+
+stop() {
+  if [ -f {{ jenkins_swarm_pid_file }} ]; then
+    /usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
+    RETVAL=$?
+  fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    [ -f {{ jenkins_swarm_pid_file }} ]
+    RETVAL=$?
+    ;;
+  restart)
+    stop && start
+    ;;
+  *)
+    echo "Usage: {start|stop|restart|status}"
+    exit 1
+esac
+
+exit $RETVAL

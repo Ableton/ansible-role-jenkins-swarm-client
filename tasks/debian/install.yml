@@ -16,10 +16,5 @@
 - name: Run installation tasks common to Unix-like systems
   include_tasks: "{{ role_path }}/tasks/unix/install.yml"
 
-- name: Install systemd service
-  include_tasks: "{{ role_path }}/tasks/debian/install-systemd.yml"
-  when: not jenkins_swarm_use_script
-
-- name: Create shell script launcher
-  include_tasks: "{{ role_path }}/tasks/unix/install-script.yml"
-  when: jenkins_swarm_use_script
+- name: Install service
+  include_tasks: "install-{{ ansible_service_mgr }}.yml"
