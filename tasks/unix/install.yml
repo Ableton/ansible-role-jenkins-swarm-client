@@ -11,7 +11,7 @@
 - name: Write labels to file
   become: true
   template:
-    src: "{{ role_path }}/files/labels.txt.j2"
+    src: "{{ role_path }}/templates/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"

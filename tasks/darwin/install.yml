@@ -37,5 +37,5 @@
 - name: Ensure LaunchDaemon plist file exists
   become: true
   template:
-    src: "{{ role_path }}/files/{{ jenkins_swarm_client_ident }}.plist.j2"
+    src: "{{ role_path }}/templates/{{ jenkins_swarm_client_ident }}.plist.j2"
     dest: "{{ jenkins_swarm_daemon_plist }}"

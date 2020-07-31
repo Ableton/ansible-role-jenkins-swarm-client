@@ -53,7 +53,7 @@
 
 - name: Write labels to file
   win_template:
-    src: "{{ role_path }}/files/labels.txt.j2"
+    src: "{{ role_path }}/templates/labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
 
 - name: Download Swarm Client JAR
