@@ -1,8 +1,8 @@
 ---
-# Group that the Swarm Client user belongs to.
+# Group that the Swarm Client user belongs to (must be defined!)
 jenkins_config_group: "jenkins"
 
-# User that the Swarm Client service is run under.
+# User that the Swarm Client service is run under (must be defined!)
 jenkins_config_owner: "jenkins"
 
 # URL to the Jenkins master instance (must be defined!)
