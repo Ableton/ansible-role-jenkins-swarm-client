@@ -1,4 +1,5 @@
 ---
+# Command used to launch Swarm Client.
 jenkins_swarm_args:
   - "-D'java.util.logging.config.file={{ jenkins_swarm_logging_properties }}'"
   - "-jar"
