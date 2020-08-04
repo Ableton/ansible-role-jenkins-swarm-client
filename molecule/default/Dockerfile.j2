@@ -1,0 +1,12 @@
+{% if item.registry is defined %}
+FROM {{ item.registry.url }}/{{ item.image }}
+{% else %}
+FROM {{ item.image }}
+{% endif %}
+
+RUN apt-get update && \
+    apt-get install -y ca-certificates gnupg openjdk-11-jre-headless python3 python3-apt \
+        sudo && \
+    apt-get clean
+
+RUN useradd -G sudo molecule
