@@ -5,6 +5,9 @@ jenkins_config_owner: "jenkins"
 # Group that the Swarm Client user belongs to.
 jenkins_config_group: "jenkins"
 
+# URL to the Jenkins master instance (must be defined!)
+jenkins_master_url: ""
+
 # Extra labels to assign to the node, other than the node's inventory_hostname and the
 # jenkins_node_label value below.
 jenkins_node_extra_labels: ""
