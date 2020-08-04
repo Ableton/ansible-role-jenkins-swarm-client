@@ -1,12 +1,12 @@
 ---
-- name: Update and clean apt packages
+- name: Update apt cache and remove unused package dependencies
   become: true
   apt:
     autoclean: true
     autoremove: true
     update_cache: true
 
-- name: Install apt dependencies
+- name: Install node apt packages
   become: true
   apt:
     name: "{{ item.key }}"
