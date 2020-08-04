@@ -6,7 +6,7 @@
     autoremove: true
     update_cache: true
 
-- name: Install apt dependencies
+- name: Install node apt packages
   become: true
   apt:
     name: "{{ item.key }}"
