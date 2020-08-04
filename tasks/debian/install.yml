@@ -1,5 +1,5 @@
 ---
-- name: Update and clean apt packages
+- name: Update apt cache and remove unused package dependencies
   become: true
   apt:
     autoclean: true
