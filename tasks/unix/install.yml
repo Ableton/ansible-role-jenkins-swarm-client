@@ -19,7 +19,7 @@
 - name: See if Python3 is installed on the host
   command: "which python3"
   changed_when: false
-  failed_when: false
+  ignore_errors: true
   register: python3_installed
 
 # Older versions of macOS can have problems downloading from HTTPS websites thanks to
