@@ -7,6 +7,7 @@ ExecStart={{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }}
 ExecStop=/usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
 PIDFile={{ jenkins_swarm_pid_file }}
 Restart=on-failure
+RestartSec=60
 Type=simple
 User={{ jenkins_config_owner }}
 WorkingDirectory={{ jenkins_swarm_home }}
