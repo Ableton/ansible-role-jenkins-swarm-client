@@ -15,6 +15,5 @@
       - "-e"
       - "FOO=BAR"
     jenkins_swarm_home: "/jenkins"
-    jenkins_swarm_use_script: true
   roles:
     - role: ableton.jenkins-swarm-client
