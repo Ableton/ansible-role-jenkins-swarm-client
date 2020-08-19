@@ -7,6 +7,7 @@
   file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
+    mode: "0755"
 
 - name: Ensure Jenkins Swarm group exists
   become: true
@@ -43,4 +44,4 @@
     state: directory
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
-    mode: 0755
+    mode: "0755"

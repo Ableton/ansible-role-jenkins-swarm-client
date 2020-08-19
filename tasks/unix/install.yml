@@ -15,6 +15,7 @@
     dest: "{{ jenkins_swarm_labels_file }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
+    mode: "0644"
 
 - name: Get path to default Python executable
   command: "which python"
@@ -58,3 +59,4 @@
     dest: "{{ jenkins_swarm_logging_properties }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
+    mode: "0644"
