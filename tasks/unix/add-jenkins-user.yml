@@ -43,4 +43,4 @@
     state: directory
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
-    mode: 0755
+    mode: "0755"
