@@ -2,29 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>MachServices</key>
-  <dict>
-    <key>{{ jenkins_swarm_client_ident }}</key>
-    <true/>
-  </dict>
-  <key>KeepAlive</key>
-  <true/>
-  <key>Label</key>
-  <string>{{ jenkins_swarm_client_ident }}</string>
-  <key>UserName</key>
-  <string>{{ jenkins_config_owner }}</string>
   <key>EnvironmentVariables</key>
   <dict>
     <key>PATH</key>
     <string>/usr/local/sbin:/usr/local/bin:/sbin:/usr/sbin:/bin:/usr/bin</string>
   </dict>
+  <key>KeepAlive</key>
+  <true/>
+  <key>Label</key>
+  <string>{{ jenkins_swarm_client_ident }}</string>
+  <key>MachServices</key>
+  <dict>
+    <key>{{ jenkins_swarm_client_ident }}</key>
+    <true/>
+  </dict>
   <key>ProgramArguments</key>
   <array>
     {{ jenkins_swarm_cmd_arguments }}
   </array>
-  <key>WorkingDirectory</key>
-  <string>{{ jenkins_swarm_home }}</string>
   <key>RunAtLoad</key>
   <true/>
+  <key>UserName</key>
+  <string>{{ jenkins_config_owner }}</string>
+  <key>WorkingDirectory</key>
+  <string>{{ jenkins_swarm_home }}</string>
 </dict>
 </plist>
