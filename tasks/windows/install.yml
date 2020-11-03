@@ -96,6 +96,7 @@
     arguments: "{{ jenkins_swarm_full_args }}"
     description: "Jenkins Swarm Client"
     working_directory: "{{ jenkins_swarm_home }}"
+    state: stopped
 
 - name: Set Jenkins Swarm Client to run as Jenkins user
   win_shell: >
