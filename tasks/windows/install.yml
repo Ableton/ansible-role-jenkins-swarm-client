@@ -37,6 +37,13 @@
   when: item.rc is defined and item.rc == 3010
   with_items: "{{ chocolatey_result.results }}"
 
+# When using SSH, changes to the PATH made by chocolatey package installations don't seem
+# to take effect until reboot.
+- name: Reboot if packages were installed and connection protocol is SSH
+  set_fact:
+    chocolatey_reboot_necessary: true
+  when: ansible_connection == "ssh" and chocolatey_result is changed
+
 - name: Reboot Windows host
   win_shell: Restart-Computer -Force
   when: chocolatey_reboot_necessary
@@ -85,7 +92,8 @@
     jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
 
 - name: Get absolute path to Java executable
-  win_shell:  "Get-Command {{ java_exe }} | Select-Object 'Source' | Format-Wide"
+  win_shell:  "Get-Command {{ java_exe }} | Select-Object 'Source' | \
+    Format-Wide -AutoSize"
   changed_when: false
   register: get_command_java
 
