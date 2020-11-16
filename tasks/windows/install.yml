@@ -85,7 +85,8 @@
     jenkins_swarm_full_args: "{{ jenkins_swarm_args + jenkins_swarm_extra_args }}"
 
 - name: Get absolute path to Java executable
-  win_shell:  "Get-Command {{ java_exe }} | Select-Object 'Source' | Format-Wide"
+  win_shell:  "Get-Command {{ java_exe }} | Select-Object 'Source' | \
+    Format-Wide -AutoSize"
   changed_when: false
   register: get_command_java
 
