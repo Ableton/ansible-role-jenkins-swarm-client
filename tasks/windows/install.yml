@@ -45,12 +45,8 @@
   when: ansible_connection == "ssh" and chocolatey_result is changed
 
 - name: Reboot Windows host
-  win_shell: Restart-Computer -Force
-  when: chocolatey_reboot_necessary
-
-- name: Wait for host to come back online
-  wait_for_connection:
-    delay: 10
+  win_reboot:
+    post_reboot_delay: 5
   when: chocolatey_reboot_necessary
 
 - name: Ensure Jenkins working directory exists
