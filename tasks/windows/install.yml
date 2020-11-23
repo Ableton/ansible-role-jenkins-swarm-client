@@ -37,20 +37,16 @@
   when: item.rc is defined and item.rc == 3010
   with_items: "{{ chocolatey_result.results }}"
 
-# When using SSH, changes to the PATH made by chocolatey package installations don't seem
-# to take effect until reboot.
-- name: Reboot if packages were installed and connection protocol is SSH
+# Sometimes changes to the PATH made by chocolatey package installations don't seem to
+# take effect until reboot.
+- name: Reboot if packages were installed
   set_fact:
     chocolatey_reboot_necessary: true
-  when: ansible_connection == "ssh" and chocolatey_result is changed
+  when: chocolatey_result is changed
 
 - name: Reboot Windows host
-  win_shell: Restart-Computer -Force
-  when: chocolatey_reboot_necessary
-
-- name: Wait for host to come back online
-  wait_for_connection:
-    delay: 10
+  win_reboot:
+    post_reboot_delay: 5
   when: chocolatey_reboot_necessary
 
 - name: Ensure Jenkins working directory exists
