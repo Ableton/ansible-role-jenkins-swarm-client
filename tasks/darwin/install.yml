@@ -1,7 +1,19 @@
 ---
+- name: Initialize homebrew_install_options fact
+  set_fact:
+    homebrew_install_options: ""
+
+- name: Set homebrew install options
+  set_fact:
+    # Ansible will add the "--" to these options for us
+    homebrew_install_options:
+      - "build-from-source"
+  when: ansible_distribution_version is version_compare('10.14', '<')
+
 - name: Install homebrew dependencies
   homebrew:
     name: "{{ item.key }}"
+    install_options: "{{ homebrew_install_options }}"
     state: present
   with_dict: "{{ jenkins_node_packages }}"
 
@@ -9,10 +21,9 @@
 - name: Ensure python3 is installed
   homebrew:
     name: "python"
+    install_options: "{{ homebrew_install_options }}"
     state: present
-  when: >
-    ansible_os_family == "Darwin" and
-    ansible_distribution_version is version_compare('10.13', '<')
+  when: ansible_distribution_version is version_compare('10.13', '<')
 
 - name: Run installation tasks common to Unix-like systems
   include_tasks: "{{ role_path }}/tasks/unix/install.yml"
