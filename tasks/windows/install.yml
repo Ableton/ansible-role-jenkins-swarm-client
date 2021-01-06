@@ -107,3 +107,15 @@
     nssm.exe set \
       '{{ jenkins_swarm_service_name }}' \
       ObjectName .\\{{ jenkins_config_owner }} {{ jenkins_user_password }}
+
+- name: Add firewall exception for prometheus port
+  community.windows.win_firewall_rule:
+    name: "Jenkins Swarm Client Prometheus"
+    localport: "{{ jenkins_swarm_prometheus_port }}"
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enabled: true
+  # Ansible treats templated variables as strings
+  when: jenkins_swarm_prometheus_port != "-1"
