@@ -27,8 +27,12 @@ jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 # to the tasks in <platform>/install.yml for supported keys.
 jenkins_node_packages: {}
 
+# If defined to a value >0, then serve Prometheus metrics on this port. This requires
+# Swarm Client version >=3.24.
+jenkins_swarm_prometheus_port: "-1"
+
 # Version of the Jenkins Swarm Client to install.
-jenkins_swarm_client_version: "3.23"
+jenkins_swarm_client_version: "3.24"
 
 # List of extra arguments to pass to the Jenkins Swarm Client process.
 jenkins_swarm_extra_args: []
