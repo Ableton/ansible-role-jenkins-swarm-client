@@ -21,6 +21,8 @@ jenkins_swarm_args:
   - "1"
   - "-pidFile"
   - "{{ jenkins_swarm_pid_file }}"
+  - "-prometheusPort"
+  - "{{ jenkins_swarm_prometheus_port }}"
 
 # String description of the service which manages the Swarm Client.
 jenkins_swarm_service_name: "Jenkins Swarm Client"
