@@ -6,7 +6,6 @@
   include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Kill Jenkins swarm client
-  become: true
   command: "launchctl unload {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true
   changed_when: false
