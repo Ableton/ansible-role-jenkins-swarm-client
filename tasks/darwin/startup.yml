@@ -6,13 +6,11 @@
   include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Run swarm client launcher script
-  become: true
   command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
   changed_when: false
   register: swarm_client_load
 
 - name: Check if swarm client service is running
-  become: true
   command: "launchctl list {{ jenkins_swarm_client_ident }}"
   changed_when: false
   register: swarm_client_list
