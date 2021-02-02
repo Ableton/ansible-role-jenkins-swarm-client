@@ -5,15 +5,39 @@
 - name: Include unix-specific defaults
   include_vars: "{{ role_path }}/vars/unix.yml"
 
-- name: Run swarm client launcher script
-  command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
-  changed_when: false
-  register: swarm_client_load
+- name: Read swarm client PID file
+  slurp:
+    src: "{{ jenkins_swarm_pid_file }}"
+  failed_when: false
+  register: service_pid_file
 
 - name: Check if swarm client service is running
-  command: "launchctl list {{ jenkins_swarm_client_ident }}"
+  command: "ps -p {{ service_pid_file.content | b64decode }}"
   changed_when: false
-  register: swarm_client_list
-  failed_when: swarm_client_list.rc != 0 or '"PID" =' not in swarm_client_list.stdout
-  when: "'service already loaded' not in swarm_client_load.stderr"
-  delay: 1
+  register: swarm_client_running
+  failed_when: false
+  when: service_pid_file.content is defined
+
+- name: Initialize should_start_swarm_client fact
+  set_fact:
+    should_start_swarm_client: >
+      service_pid_file.content is not defined or swarm_client_running.rc != 0
+
+- name: Start swarm client service
+  block:
+    - name: Run swarm client launcher script
+      command: "launchctl load {{ jenkins_swarm_daemon_plist }}"
+      changed_when: false
+
+    - name: Read PID file
+      slurp:
+        src: "{{ jenkins_swarm_pid_file }}"
+      register: service_pid_file
+      until: service_pid_file is success
+      delay: 1
+      retries: 10
+
+    - name: Assert that swarm client service is running
+      command: "ps -p {{ service_pid_file.content | b64decode }}"
+      changed_when: false
+  when: should_start_swarm_client
