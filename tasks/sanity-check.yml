@@ -1,12 +1,9 @@
 ---
 - name: Sanity check required variables
-  fail:
-    msg: "Undefined required variable(s)"
-  when: required_variable == ""
-  loop_control:
-    loop_var: required_variable
-  with_items:
-    - "{{ jenkins_config_group }}"
-    - "{{ jenkins_config_owner }}"
-    - "{{ jenkins_master_url }}"
-    - "{{ jenkins_swarm_home }}"
+  assert:
+    that:
+      - jenkins_config_group != ''
+      - jenkins_config_owner != ''
+      - jenkins_master_url != ''
+      - jenkins_swarm_home != ''
+    quiet: true
