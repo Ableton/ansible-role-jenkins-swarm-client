@@ -1,0 +1,41 @@
+---
+- name: Initialize swarm_client_service_running fact
+  set_fact:
+    swarm_client_service_running: false
+
+- name: Sanity check the jenkins_swarm_pid_file variable
+  assert:
+    that:
+      - jenkins_swarm_pid_file != ''
+    quiet: true
+
+- name: Slurp the Swarm Client PID file
+  slurp:
+    path: "{{ jenkins_swarm_pid_file }}"
+  register: jenkins_swarm_pid
+  ignore_errors: true
+
+- name: Check if Swarm Client service is running on Unix host
+  command: "ps -p {{ jenkins_swarm_pid.content | b64decode }}"
+  changed_when: false
+  register: swarm_client_get_process
+  ignore_errors: true
+  when: >
+    ansible_os_family != 'Windows' and
+    jenkins_swarm_pid is success and
+    jenkins_swarm_pid.content is defined
+
+- name: Check if Swarm Client service is running on Windows host
+  win_shell: "Get-Process -Id {{ jenkins_swarm_pid.content | b64decode }}"
+  changed_when: false
+  register: swarm_client_get_process
+  ignore_errors: true
+  when: >
+    ansible_os_family == 'Windows' and
+    jenkins_swarm_pid is success and
+    jenkins_swarm_pid.content is defined
+
+- name: Set swarm_client_service_running fact
+  set_fact:
+    swarm_client_service_running: true
+  when: swarm_client_get_process.rc is defined and swarm_client_get_process.rc == 0
