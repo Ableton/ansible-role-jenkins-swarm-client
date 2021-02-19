@@ -1,0 +1,26 @@
+---
+- name: Add scheduled task to start Swarm Client during logon
+  win_scheduled_task:
+    name: "{{ jenkins_swarm_service_name }}"
+    actions:
+      # Task Scheduler is a bit picky about quotes, and we need to make sure that the
+      # executable is padded with double-quotes or else the shell may not interpret it
+      # correctly.
+      - path: "\"{{ get_command_java.stdout | trim }}\""
+        arguments: "{{ jenkins_swarm_full_args | join(' ') }}"
+        working_directory: "{{ jenkins_swarm_home }}"
+    description: "Jenkins Swarm Client"
+    author: "Created by Ansible"
+    # 2 -> Compatible with Task Scheduler 2.0
+    compatibility: 2
+    # PT0S -> Infinite (never kill the task)
+    execution_time_limit: "PT0S"
+    logon_type: interactive_token
+    # 3 -> Stop other instances of the task before starting a new one
+    multiple_instances: 3
+    run_only_if_idle: false
+    run_only_if_network_available: true
+    triggers:
+      - type: logon
+        # Run the service when the Jenkins Swarm Client user logs in
+        user_id: "{{ jenkins_config_owner }}"
