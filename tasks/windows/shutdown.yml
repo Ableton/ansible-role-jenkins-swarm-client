@@ -2,13 +2,4 @@
 - name: Include platform-specific defaults
   include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- name: Check if Windows service exists
-  win_service:
-    name: "{{ jenkins_swarm_service_name }}"
-  register: win_service_info
-
-- name: Stop Windows service
-  win_service:
-    name: "{{ jenkins_swarm_service_name }}"
-    state: stopped
-  when: win_service_info.exists
+- include_tasks: "tasks/windows/shutdown-{{ swarm_client_windows_start_type }}.yml"
