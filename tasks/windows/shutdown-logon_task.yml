@@ -1,0 +1,6 @@
+---
+- include_tasks: "{{ role_path }}/tasks/check-if-running.yml"
+
+- name: Stop the Swarm Client service
+  win_shell: "Stop-Process -Id {{ jenkins_swarm_pid.content | b64decode }}"
+  when: swarm_client_service_running

@@ -1,0 +1,27 @@
+---
+# It is necessary for us to remove and re-create this service since NSSM will fail with an
+# error when creating the service if it already exists. This could be mitigated by adding
+# "ignore_errors: true" to the service creation step, but I would prefer to recreate the
+# service rather than suppress any errors which may occur while creating it. Also, we need
+# to make sure that if the arguments in jenkins_swarm_cmd change then they are added to
+# the NSSM service.
+- name: Remove Windows service
+  win_service:
+    name: "{{ jenkins_swarm_service_name }}"
+    state: absent
+  ignore_errors: true
+
+- name: Create Windows service with NSSM
+  win_nssm:
+    name: "{{ jenkins_swarm_service_name }}"
+    application: "{{ get_command_java.stdout | trim }}"
+    arguments: "{{ jenkins_swarm_full_args }}"
+    description: "Jenkins Swarm Client"
+    working_directory: "{{ jenkins_swarm_home }}"
+    state: stopped
+
+- name: Set Jenkins Swarm Client to run as Jenkins user
+  win_shell: >
+    nssm.exe set \
+      '{{ jenkins_swarm_service_name }}' \
+      ObjectName .\\{{ jenkins_config_owner }} {{ jenkins_user_password }}

@@ -50,3 +50,12 @@ jenkins_user_password: ""
 #     name: ableton.jenkins-swarm-client
 #     tasks_from: startup.yml
 swarm_client_start_service: true
+
+# Defines how the Swarm Client service should be started and managed by Windows. Must be
+# one of the following strings:
+# - nssm: Use NSSM to create a Windows background service (default).
+# - logon_task: Use a scheduled task to start the service when a user logs in. This option
+#   may be necessary if you need applications launched by Jenkins to create a GUI window.
+#   Note that this option may require you to configure Windows to automatically log in the
+#   `jenkins_config_owner` user.
+swarm_client_windows_start_type: "nssm"
