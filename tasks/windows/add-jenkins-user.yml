@@ -9,6 +9,7 @@
     update_password: on_create
 
 - name: Ensure Jenkins Swarm Client home directory exists
+  become: true
   become_user: "{{ jenkins_config_owner }}"  # noqa 501
   win_file:
     path: "C:\\Users\\{{ jenkins_config_owner }}"
