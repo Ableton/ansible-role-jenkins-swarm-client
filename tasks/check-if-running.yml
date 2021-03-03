@@ -39,3 +39,15 @@
   set_fact:
     swarm_client_service_running: true
   when: swarm_client_get_process.rc is defined and swarm_client_get_process.rc == 0
+
+- name: Remove stale PID file on Unix host
+  file:
+    path: "{{ jenkins_swarm_pid_file }}"
+    state: absent
+  when: ansible_os_family != 'Windows' and not swarm_client_service_running
+
+- name: Remove stale PID file on Windows host
+  win_file:
+    path: "{{ jenkins_swarm_pid_file }}"
+    state: absent
+  when: ansible_os_family == 'Windows' and not swarm_client_service_running
