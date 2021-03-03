@@ -37,7 +37,7 @@ jenkins_swarm_client_version: "3.24"
 # List of extra arguments to pass to the Jenkins Swarm Client process.
 jenkins_swarm_extra_args: []
 
-# Jenkins Swarm Client home directory (must be defined!)
+# Jenkins Swarm Client home directory. Should not contain spaces. (must be defined!)
 jenkins_swarm_home: ""
 
 # Password for Jenkins service user (only used on Windows).
