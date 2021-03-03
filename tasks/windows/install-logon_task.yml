@@ -19,7 +19,7 @@
     # 3 -> Stop other instances of the task before starting a new one
     multiple_instances: 3
     run_only_if_idle: false
-    run_only_if_network_available: true
+    run_only_if_network_available: false
     triggers:
       - type: logon
         # Run the service when the Jenkins Swarm Client user logs in
