@@ -1,15 +1,6 @@
 ---
-# Unfortunately, since we don't know what state the system is currently in, nor can we log
-# a user in via PowerShell, the safest way to start the service is to reboot the system
-# and allow Windows to run the service during logon.
-- name: Reboot Windows host
-  win_reboot:
-    post_reboot_delay: 5
+- include_tasks: "{{ role_path }}/tasks/check-if-running.yml"
 
-- name: Wait until Swarm Client service has started
-  slurp:
-    path: "{{ jenkins_swarm_pid_file }}"
-  register: jenkins_swarm_pid_win
-  until: jenkins_swarm_pid_win is success
-  retries: 30
-  delay: 5
+- name: Start Swarm Client service
+  win_shell: "Start-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'"
+  when: not swarm_client_service_running
