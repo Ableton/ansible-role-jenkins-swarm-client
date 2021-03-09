@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: jenkins_swarm_client
-  author: Nik Reiman
+  author: ableton
   description: Installs the Jenkins Swarm Client service
   company: Ableton AG
 
