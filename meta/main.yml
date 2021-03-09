@@ -1,18 +1,21 @@
 ---
 galaxy_info:
-  role_name: jenkins_swarm_client
-  author: Nik Reiman
-  description: Installs the Jenkins Swarm Client service
+  author: ableton
   company: Ableton AG
-
-  license: BSD
-
-  min_ansible_version: 2.8
-
+  description: Installs the Jenkins Swarm Client service
   github_branch: master
+  license: MIT
+  min_ansible_version: 2.10
+  role_name: jenkins_swarm_client
+
+  galaxy_tags:
+    - jenkins
 
   platforms:
     - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
       versions:
         - all
     - name: Mac OS X
@@ -20,11 +23,7 @@ galaxy_info:
         - all
     - name: Windows
       versions:
-        - 7
-        - 8
         - 8.1
         - 10
 
-  galaxy_tags: []
-
-  dependencies: []
+dependencies: []
