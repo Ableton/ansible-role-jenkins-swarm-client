@@ -3,7 +3,7 @@ Jenkins Swarm Client Role
 
 This role installs and starts up the [Jenkins Swarm
 Client][jenkins-swarm-client] on a host, which will allow it to connect to a
-Jenkins master instance as a build node.
+Jenkins controller instance as a build node.
 
 Requirements
 ------------
@@ -35,7 +35,7 @@ Example Playbook
 ----------------
 
 ```
-- name: Get info for Jenkins master
+- name: Get info for Jenkins controller
   hosts: "{{ host | default('nodes') }}"
   tasks:
     - set_fact:
