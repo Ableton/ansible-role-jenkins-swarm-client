@@ -5,16 +5,16 @@ jenkins_config_group: "jenkins"
 # User that the Swarm Client service is run under (must be defined!)
 jenkins_config_owner: "jenkins"
 
-# URL to the Jenkins master instance (must be defined!)
+# URL to the Jenkins controller instance (must be defined!)
 jenkins_master_url: ""
 
 # Extra labels to assign to the node, other than the node's inventory_hostname and the
 # jenkins_node_label value below.
 jenkins_node_extra_labels: ""
 
-# The name assigned to this node, which is shown to the user in the Jenkins master. Note
-# that the Jenkins Swarm plugin will append a unique 8-character hexadecimal identifier to
-# the end of this value.
+# The name assigned to this node, which is shown to the user in the Jenkins controller.
+# Note that the Jenkins Swarm plugin will append a unique 8-character hexadecimal
+# identifier to the end of this value.
 jenkins_node_name: "{{ inventory_hostname }}"
 
 # The label for this node.
