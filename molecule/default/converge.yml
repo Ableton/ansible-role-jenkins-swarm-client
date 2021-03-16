@@ -4,7 +4,7 @@
   vars:
     jenkins_config_group: "jgroup"
     jenkins_config_owner: "juser"
-    jenkins_master_url: "http://127.0.0.1:8080"
+    jenkins_controller_url: "http://127.0.0.1:8080"
     jenkins_node_extra_labels: "extra-label"
     jenkins_node_label: "node-label"
     jenkins_node_name: "molecule-test-node"
