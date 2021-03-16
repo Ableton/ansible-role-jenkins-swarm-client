@@ -47,7 +47,7 @@ jenkins_user_password: ""
 # necessary *not* to start the service right away, in case additional work must be done on
 # the node before allowing it to run jobs. To start the service manually, you should do:
 # - include_role:
-#     name: ableton.jenkins-swarm-client
+#     name: ableton.jenkins_swarm_client
 #     tasks_from: startup.yml
 swarm_client_start_service: true
 
