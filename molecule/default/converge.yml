@@ -16,4 +16,4 @@
       - "FOO=BAR"
     jenkins_swarm_home: "/jenkins"
   roles:
-    - role: ableton.jenkins-swarm-client
+    - role: ableton.jenkins_swarm_client
