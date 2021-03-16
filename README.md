@@ -46,7 +46,7 @@ Example Playbook
   vars:
     - jenkins_swarm_home: "/tmp/jenkins-node"
   roles:
-    - ableton.jenkins-swarm-client
+    - ableton.jenkins_swarm_client
 ```
 
 
