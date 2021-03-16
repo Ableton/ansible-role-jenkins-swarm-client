@@ -32,7 +32,7 @@ jenkins_node_packages: {}
 jenkins_swarm_prometheus_port: "-1"
 
 # Version of the Jenkins Swarm Client to install.
-jenkins_swarm_client_version: "3.24"
+jenkins_swarm_client_version: "3.25"
 
 # List of extra arguments to pass to the Jenkins Swarm Client process.
 jenkins_swarm_extra_args: []
