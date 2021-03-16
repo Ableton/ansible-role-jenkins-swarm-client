@@ -4,6 +4,6 @@
     that:
       - jenkins_config_group != ''
       - jenkins_config_owner != ''
-      - jenkins_master_url != ''
+      - jenkins_controller_url != ''
       - jenkins_swarm_home != ''
     quiet: true

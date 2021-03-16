@@ -16,7 +16,7 @@ Role Variables
 
 The following variables must be defined before attempting to apply this role:
 
-- `jenkins_master_url`: URL to the Jenkins master instance.
+- `jenkins_controller_url`: URL for the Jenkins controller.
 - `jenkins_swarm_home`: Path to use for the Swarm Client home. Aside from
   containing the Swarm Client software, this directory will also be used for the
   build `workspace`.
@@ -39,7 +39,7 @@ Example Playbook
   hosts: "{{ host | default('nodes') }}"
   tasks:
     - set_fact:
-        jenkins_master_url: "http://jenkins.example.com"
+        jenkins_controller_url: "http://jenkins.example.com"
 
 - name: Provision Jenkins node
   hosts: "{{ host | default('nodes') }}"
