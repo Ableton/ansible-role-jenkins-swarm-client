@@ -5,7 +5,7 @@ jenkins_swarm_args:
   - "-jar"
   - "{{ jenkins_swarm_jar_path }}"
   - "-master"
-  - "{{ jenkins_master_url }}"
+  - "{{ jenkins_controller_url }}"
   - "-disableClientsUniqueId"
   - "-disableSslVerification"
   - "-deleteExistingClients"
