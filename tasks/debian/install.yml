@@ -1,18 +1,4 @@
 ---
-- name: Update apt cache and remove unused package dependencies
-  become: true
-  apt:
-    autoclean: true
-    autoremove: true
-    update_cache: true
-
-- name: Install node apt packages
-  become: true
-  apt:
-    name: "{{ item.key }}"
-    state: present
-  with_dict: "{{ jenkins_node_packages }}"
-
 - name: Run installation tasks common to Unix-like systems
   include_tasks: "{{ role_path }}/tasks/unix/install.yml"
 
