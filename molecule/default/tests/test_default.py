@@ -34,10 +34,6 @@ def test_jenkins_swarm_client_node_labels(host):
     assert node_labels_file.content == b'instance node-label extra-label\n'
 
 
-def test_packages_installed(host):
-    assert host.package('cowsay').is_installed
-
-
 def test_swarm_client_running(host):
     process = host.process.get(comm='java')
 
