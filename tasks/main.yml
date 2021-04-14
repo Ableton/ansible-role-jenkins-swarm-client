@@ -1,9 +1,9 @@
 ---
-- include_tasks: "sanity-check.yml"
+- import_tasks: "sanity-check.yml"
 
-- include_tasks: "shutdown.yml"
+- import_tasks: "shutdown.yml"
 
 - include_tasks: "{{ ansible_os_family | lower }}/install.yml"
 
-- include_tasks: "startup.yml"
+- import_tasks: "startup.yml"
   when: swarm_client_start_service
