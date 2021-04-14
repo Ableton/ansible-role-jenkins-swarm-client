@@ -1,5 +1,5 @@
 ---
-- include_tasks: "{{ role_path }}/tasks/check-if-running.yml"
+- include_tasks: "check-if-running.yml"
 
 - name: Start Swarm Client service
   win_shell: "Start-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'"

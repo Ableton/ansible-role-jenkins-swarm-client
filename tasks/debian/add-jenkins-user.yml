@@ -1,2 +1,2 @@
 ---
-- include_tasks: "{{ role_path }}/tasks/unix/add-jenkins-user.yml"
+- include_tasks: "unix/add-jenkins-user.yml"
