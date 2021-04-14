@@ -6,12 +6,12 @@
   include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Run user setup tasks
-  include_tasks: "{{ role_path }}/tasks/unix/add-jenkins-user.yml"
+  include_tasks: "unix/add-jenkins-user.yml"
 
 - name: Write labels to file
   become: true
   template:
-    src: "{{ role_path }}/templates/labels.txt.j2"
+    src: "labels.txt.j2"
     dest: "{{ jenkins_swarm_labels_file }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
@@ -55,7 +55,7 @@
 - name: Copy logging properties file
   become: true
   copy:
-    src: "{{ role_path }}/files/logging.properties"
+    src: "logging.properties"
     dest: "{{ jenkins_swarm_logging_properties }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
