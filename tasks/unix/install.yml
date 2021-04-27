@@ -38,7 +38,7 @@
 - name: Use Python3 to downloald Swarm Client if available
   set_fact:
     swarm_client_get_url_python: "{{ python3_path.stdout }}"
-  when: python3_path is success
+  when: python3_path is succeeded
 
 - name: Download Swarm Client JAR
   become: true
