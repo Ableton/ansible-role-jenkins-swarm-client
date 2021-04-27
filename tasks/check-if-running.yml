@@ -22,7 +22,7 @@
   ignore_errors: true
   when: >
     ansible_os_family != 'Windows' and
-    jenkins_swarm_pid is success and
+    jenkins_swarm_pid is succeeded and
     jenkins_swarm_pid.content is defined
 
 - name: Check if Swarm Client service is running on Windows host
@@ -32,7 +32,7 @@
   ignore_errors: true
   when: >
     ansible_os_family == 'Windows' and
-    jenkins_swarm_pid is success and
+    jenkins_swarm_pid is succeeded and
     jenkins_swarm_pid.content is defined
 
 - name: Set swarm_client_service_running fact

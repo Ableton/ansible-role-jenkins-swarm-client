@@ -38,7 +38,7 @@
       slurp:
         src: "{{ jenkins_swarm_pid_file }}"
       register: service_pid_file
-      until: service_pid_file is success
+      until: service_pid_file is succeeded
       delay: 1
       retries: 10
 
