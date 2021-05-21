@@ -35,7 +35,7 @@
   ignore_errors: true
   register: python3_path
 
-- name: Use Python3 to downloald Swarm Client if available
+- name: Use Python3 to download Swarm Client if available
   set_fact:
     swarm_client_get_url_python: "{{ python3_path.stdout }}"
   when: python3_path is succeeded
