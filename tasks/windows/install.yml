@@ -44,10 +44,6 @@
   # Ansible treats templated variables as strings
   when: jenkins_swarm_prometheus_port != "-1"
 
-- name: Assemble full command arguments
-  set_fact:
-    jenkins_swarm_full_args: "{{ jenkins_swarm_launch_args + jenkins_swarm_extra_args }}"
-
 - name: Get absolute path to Java executable
   win_shell: "Get-Command {{ java_exe }} | Select-Object 'Source' | \
     Format-Wide -AutoSize"

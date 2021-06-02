@@ -1,8 +1,4 @@
 ---
-- name: Assemble full command arguments
-  set_fact:
-    jenkins_swarm_full_args: "{{ jenkins_swarm_launch_args + jenkins_swarm_extra_args }}"
-
 - name: Ensure daemon is installed
   become: true
   apt:

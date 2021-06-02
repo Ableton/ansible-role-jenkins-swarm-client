@@ -7,7 +7,7 @@
       # executable is padded with double-quotes or else the shell may not interpret it
       # correctly.
       - path: "\"{{ get_command_java.stdout | trim }}\""
-        arguments: "{{ jenkins_swarm_full_args | join(' ') }}"
+        arguments: "{{ jenkins_swarm_launch_args | join(' ') }}"
         working_directory: "{{ jenkins_swarm_home }}"
     allow_demand_start: true
     description: "{{ jenkins_swarm_service_description }}"
