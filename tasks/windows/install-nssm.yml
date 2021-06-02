@@ -15,7 +15,7 @@
   win_nssm:
     name: "{{ jenkins_swarm_service_name }}"
     application: "{{ get_command_java.stdout | trim }}"
-    arguments: "{{ jenkins_swarm_full_args }}"
+    arguments: "{{ jenkins_swarm_launch_args }}"
     description: "{{ jenkins_swarm_service_description }}"
     working_directory: "{{ jenkins_swarm_home }}"
     state: stopped
