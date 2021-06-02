@@ -9,9 +9,9 @@
     jenkins_node_label: "node-label"
     jenkins_node_name: "molecule-test-node"
     jenkins_node_pool: "test"
-    jenkins_swarm_extra_args:
-      - "-e"
-      - "FOO=BAR"
+    jenkins_swarm_config_args:
+      environmentVariables:
+        FOO: "BAR"
     jenkins_swarm_home: "/jenkins"
   roles:
     - role: ableton.jenkins_swarm_client

@@ -3,6 +3,9 @@
 java_exe: "/usr/bin/java"
 
 # Destination path for the Swarm Client JAR file
+jenkins_swarm_config_file: "{{ jenkins_swarm_home }}/swarm-client-config.yml"
+
+# Destination path for the Swarm Client JAR file
 jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}\
   /swarm-client-{{ jenkins_swarm_client_version }}.jar"
 

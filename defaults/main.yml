@@ -23,6 +23,11 @@ jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 # Description shown in the Jenkins node information page for this particular node.
 jenkins_swarm_node_description: "{{ inventory_hostname }}"
 
+# Dict of configuration arguments to use when creating the Swarm Client's YAML
+# configuration file. For more details on the configuration file, see:
+# https://github.com/jenkinsci/swarm-plugin/blob/master/docs/configfile.adoc
+jenkins_swarm_config_args: {}
+
 # If defined to a value >0, then serve Prometheus metrics on this port. This requires
 # Swarm Client version >=3.24.
 jenkins_swarm_prometheus_port: "-1"
