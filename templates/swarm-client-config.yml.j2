@@ -1,0 +1,9 @@
+---
+description: "{{ jenkins_swarm_node_description }}"
+name: "{{ jenkins_node_name }}"
+# The pidFile path is NOT quoted so it can be compatible with Windows paths
+pidFile: {{ jenkins_swarm_pid_file }}
+prometheusPort: "{{ jenkins_swarm_prometheus_port }}"
+url: "{{ jenkins_controller_url }}"
+
+{{ jenkins_swarm_config_args | to_nice_yaml(indent=2) }}

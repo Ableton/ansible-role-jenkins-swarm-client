@@ -21,14 +21,8 @@ The following variables must be defined before attempting to apply this role:
   containing the Swarm Client software, this directory will also be used for the
   build `workspace`.
 
-This role defines the following variables, which may be overridden if
-desired:
-
-- `jenkins_node_name`: The name of the node to display in Jenkins. Note that
-  Jenkins will add a unique postfix to this name. Default value is
-  `inventory_hostname`.
-- `jenkins_node_label`: A label to add to the node. Note that the Swarm Client
-  plugin will add the `swarm` label to all nodes.
+This role also defines a dict variable, `jenkins_swarm_config_args`, which may contain
+values for the swarm client's [YAML configuration file][swarm-client-yaml-config].
 
 
 Example Playbook
@@ -51,3 +45,4 @@ Example Playbook
 
 
 [jenkins-swarm-client]: https://plugins.jenkins.io/swarm
+[swarm-client-yaml-config]: https://github.com/jenkinsci/swarm-plugin/blob/master/docs/configfile.adoc
