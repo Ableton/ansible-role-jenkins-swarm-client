@@ -28,7 +28,7 @@ jenkins_swarm_node_description: "{{ inventory_hostname }}"
 jenkins_swarm_prometheus_port: "-1"
 
 # Version of the Jenkins Swarm Client to install.
-jenkins_swarm_client_version: "3.26"
+jenkins_swarm_client_version: "3.27"
 
 # List of extra arguments to pass to the Jenkins Swarm Client process.
 jenkins_swarm_extra_args: []
