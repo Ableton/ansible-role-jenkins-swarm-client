@@ -10,7 +10,7 @@
         arguments: "{{ jenkins_swarm_full_args | join(' ') }}"
         working_directory: "{{ jenkins_swarm_home }}"
     allow_demand_start: true
-    description: "Jenkins Swarm Client"
+    description: "{{ jenkins_swarm_service_description }}"
     author: "Created by Ansible"
     # 2 -> Compatible with Task Scheduler 2.0
     compatibility: 2
