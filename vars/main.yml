@@ -1,5 +1,6 @@
 ---
-# Command used to launch Swarm Client.
+# Command used to launch Swarm Client, minus the Java executable itself. These arguments
+# directly follow the Java executable, whose absolute path is determined separately.
 jenkins_swarm_args:
   - "-Djava.util.logging.config.file={{ jenkins_swarm_logging_properties }}"
   - "-jar"
