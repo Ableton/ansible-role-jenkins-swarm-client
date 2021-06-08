@@ -14,9 +14,6 @@ jenkins_swarm_config_file: "{{ jenkins_swarm_home }}\\swarm-client-config.yml"
 jenkins_swarm_jar_path: "{{ jenkins_swarm_home }}\
   \\swarm-client-{{ jenkins_swarm_client_version }}.jar"
 
-# Where to create the labels file used by the Swarm Client
-jenkins_swarm_labels_file: "{{ jenkins_swarm_home }}\\node-labels.txt"
-
 # Location of logging properties file
 jenkins_swarm_logging_properties: "{{ jenkins_swarm_home }}\\logging.properties"
 

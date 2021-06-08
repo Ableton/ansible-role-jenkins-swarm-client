@@ -10,11 +10,6 @@
     path: "{{ jenkins_swarm_home }}"
     state: directory
 
-- name: Write labels to file
-  win_template:
-    src: "labels.txt.j2"
-    dest: "{{ jenkins_swarm_labels_file }}"
-
 - name: Download Swarm Client JAR
   win_get_url:
     url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client\
