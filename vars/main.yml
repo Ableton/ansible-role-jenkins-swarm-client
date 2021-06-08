@@ -25,7 +25,7 @@ jenkins_swarm_launch_args:
   - "-prometheusPort"
   - "{{ jenkins_swarm_prometheus_port }}"
   - "-description"
-  - "'{{ jenkins_swarm_node_description }}'"
+  - "\"{{ jenkins_swarm_node_description }}\""
 
 # Description of the service which manages the Swarm Client.
 jenkins_swarm_service_description: "Swarm Client service for ad-hoc Jenkins clusters"
