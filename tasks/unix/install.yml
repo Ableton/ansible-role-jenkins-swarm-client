@@ -8,15 +8,6 @@
 - name: Run user setup tasks
   include_tasks: "unix/add-jenkins-user.yml"
 
-- name: Write labels to file
-  become: true
-  template:
-    src: "labels.txt.j2"
-    dest: "{{ jenkins_swarm_labels_file }}"
-    owner: "{{ jenkins_config_owner }}"
-    group: "{{ jenkins_config_group }}"
-    mode: "0644"
-
 - name: Get path to default Python executable
   command: "which python"
   changed_when: false

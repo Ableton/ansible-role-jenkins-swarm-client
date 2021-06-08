@@ -8,17 +8,10 @@ jenkins_config_owner: "jenkins"
 # URL to the Jenkins controller instance (must be defined!)
 jenkins_controller_url: ""
 
-# Extra labels to assign to the node, other than the node's inventory_hostname and the
-# jenkins_node_label value below.
-jenkins_node_extra_labels: ""
-
 # The name assigned to this node, which is shown to the user in the Jenkins controller.
 # Note that the Jenkins Swarm plugin will append a unique 8-character hexadecimal
 # identifier to the end of this value.
 jenkins_node_name: "{{ inventory_hostname }}"
-
-# The label for this node.
-jenkins_node_label: "{{ jenkins_node_pool }}-{{ jenkins_node_platform }}"
 
 # Description shown in the Jenkins node information page for this particular node.
 jenkins_swarm_node_description: "{{ inventory_hostname }}"
