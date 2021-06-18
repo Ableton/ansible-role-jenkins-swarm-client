@@ -3,7 +3,7 @@ Description={{ jenkins_swarm_service_description }}
 After=network.target
 
 [Service]
-ExecStart={{ java_exe }} {{ jenkins_swarm_full_args | join(" ") }}
+ExecStart={{ java_exe }} {{ jenkins_swarm_launch_args | join(" ") }}
 ExecStop=/usr/bin/pkill -F {{ jenkins_swarm_pid_file }}
 PIDFile={{ jenkins_swarm_pid_file }}
 Restart=always
