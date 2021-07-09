@@ -16,7 +16,7 @@
 
 - name: Install Jenkins Swarm Client service
   become: true
-  service:
+  sysvinit:
     name: "jenkins-swarm-client"
     enabled: true
     state: stopped
