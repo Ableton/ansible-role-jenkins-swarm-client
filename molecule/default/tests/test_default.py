@@ -27,11 +27,12 @@ def test_jenkins_dir(host):
     assert jenkins_dir.group == 'jgroup'
 
 
-def test_jenkins_swarm_client_node_labels(host):
-    node_labels_file = host.file('/jenkins/node-labels.txt')
+def test_jenkins_swarm_client_config_files(host):
+    swarm_client_config_file = host.file('/jenkins/swarm-client-config.yml')
+    logging_config_file = host.file('/jenkins/logging.properties')
 
-    assert node_labels_file.is_file
-    assert node_labels_file.content == b'instance node-label extra-label\n'
+    assert swarm_client_config_file.is_file
+    assert logging_config_file.is_file
 
 
 def test_swarm_client_running(host):
@@ -42,24 +43,7 @@ def test_swarm_client_running(host):
         '/usr/bin/java',
         '-Djava.util.logging.config.file=/jenkins/logging.properties',
         '-jar',
-        '/jenkins/swarm-client-3.22.jar',
-        '-master',
-        'http://127.0.0.1:8080',
-        '-disableClientsUniqueId',
-        '-disableSslVerification',
-        '-deleteExistingClients',
-        '-labelsFile',
-        '/jenkins/node-labels.txt',
-        '-mode',
-        'exclusive',
-        '-name',
-        'molecule-test-node',
-        '-fsroot',
-        '/jenkins',
-        '-executors',
-        '1',
-        '-pidFile',
-        '/jenkins/swarm-client.pid',
-        '-e',
-        'FOO=BAR',
+        '/jenkins/swarm-client-3.27.jar',
+        '-config',
+        '/jenkins/swarm-client-config.yml'
     ])
