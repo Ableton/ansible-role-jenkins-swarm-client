@@ -3,5 +3,5 @@
 
 - name: Stop the Swarm Client service
   win_shell: "Stop-Process -Id {{ jenkins_swarm_pid.content | b64decode }}"
-  ignore_errors: true
+  ignore_errors: true  # noqa ignore-errors
   when: swarm_client_service_running

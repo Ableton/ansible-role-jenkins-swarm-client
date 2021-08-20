@@ -12,5 +12,5 @@
 
 - name: Kill Jenkins swarm client
   command: "launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
-  ignore_errors: true
+  ignore_errors: true  # noqa ignore-errors
   changed_when: false
