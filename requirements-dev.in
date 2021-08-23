@@ -1,4 +1,5 @@
 ansible
+black
 docker-py
 molecule
 python-jenkins
