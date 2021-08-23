@@ -1,4 +1,5 @@
 ansible
+ansible-lint
 black
 docker-py
 molecule
