@@ -14,4 +14,4 @@
         - "extra-label"
     jenkins_swarm_home: "/jenkins"
   roles:
-    - role: ableton.jenkins_swarm_client
+    - role: ansible-role-jenkins-swarm-client

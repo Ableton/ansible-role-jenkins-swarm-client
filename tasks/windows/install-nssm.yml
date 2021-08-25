@@ -9,7 +9,7 @@
   win_service:
     name: "{{ jenkins_swarm_service_name }}"
     state: absent
-  ignore_errors: true
+  ignore_errors: true  # noqa ignore-errors
 
 - name: Create Windows service with NSSM
   win_nssm:
