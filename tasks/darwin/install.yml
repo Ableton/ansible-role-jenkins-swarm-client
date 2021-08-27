@@ -21,3 +21,4 @@
     src: "{{ jenkins_swarm_client_ident }}.plist.j2"
     dest: "{{ jenkins_swarm_daemon_plist }}"
     mode: "0644"
+    validate: "plutil -lint %s"
