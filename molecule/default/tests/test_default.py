@@ -7,10 +7,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-def test_java_installed(host):
-    assert host.file("/usr/bin/java").exists
-
-
 def test_jenkins_user(host):
     user = host.user("juser")
 
