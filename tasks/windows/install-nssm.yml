@@ -20,8 +20,15 @@
     working_directory: "{{ jenkins_swarm_home }}"
     state: stopped
 
+- name: Ensure that Jenkins user can run services
+  win_user_right:
+    name: "SeServiceLogonRight"
+    action: add
+    users:
+      - "{{ jenkins_config_owner }}"
+
 - name: Set Jenkins Swarm Client to run as Jenkins user
-  win_shell: >
-    nssm.exe set \
-      '{{ jenkins_swarm_service_name }}' \
-      ObjectName .\\{{ jenkins_config_owner }} {{ jenkins_user_password }}
+  win_service:
+    name: "{{ jenkins_swarm_service_name }}"
+    username: "{{ jenkins_config_owner }}"
+    password: "{{ jenkins_user_password }}"
