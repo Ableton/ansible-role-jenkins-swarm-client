@@ -1,3 +1,5 @@
+"""Molecule tests for the default scenario."""
+
 import os
 
 import testinfra.utils.ansible_runner
@@ -7,11 +9,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-def test_java_installed(host):
-    assert host.file("/usr/bin/java").exists
-
-
 def test_jenkins_user(host):
+    """Test that the Jenkins user was created."""
     user = host.user("juser")
 
     assert user.group == "jgroup"
@@ -20,6 +19,7 @@ def test_jenkins_user(host):
 
 
 def test_jenkins_dir(host):
+    """Test that the Jenkins directory was created."""
     jenkins_dir = host.file("/jenkins")
 
     assert jenkins_dir.is_directory
@@ -29,6 +29,7 @@ def test_jenkins_dir(host):
 
 
 def test_jenkins_swarm_client_config_files(host):
+    """Test that Swarm Client configuration files were created."""
     swarm_client_config_file = host.file("/jenkins/swarm-client-config.yml")
     logging_config_file = host.file("/jenkins/logging.properties")
 
@@ -37,6 +38,7 @@ def test_jenkins_swarm_client_config_files(host):
 
 
 def test_swarm_client_running(host):
+    """Test that the Swarm Client service was started."""
     process = host.process.get(comm="java")
 
     assert process is not None
