@@ -4,14 +4,14 @@
 #
 #    pip-compile --output-file=requirements-dev.txt requirements-dev.in
 #
-ansible==2.10.7
+ansible==4.6.0
     # via -r requirements-dev.in
-ansible-base==2.10.13
-    # via ansible
 ansible-compat==0.5.0
     # via
     #   molecule
     #   molecule-docker
+ansible-core==2.11.5
+    # via ansible
 ansible-lint==5.2.0
     # via -r requirements-dev.in
 appdirs==1.4.4
@@ -57,7 +57,7 @@ cookiecutter==1.7.3
     # via molecule
 cryptography==3.3.2
     # via
-    #   ansible-base
+    #   ansible-core
     #   paramiko
 distro==1.6.0
     # via selinux
@@ -84,7 +84,7 @@ isort==5.9.3
     # via flake8-isort
 jinja2==2.11.3
     # via
-    #   ansible-base
+    #   ansible-core
     #   cookiecutter
     #   jinja2-time
     #   molecule
@@ -108,7 +108,7 @@ mypy-extensions==0.4.3
     # via black
 packaging==20.4
     # via
-    #   ansible-base
+    #   ansible-core
     #   ansible-lint
     #   molecule
     #   pytest
@@ -150,8 +150,8 @@ python-slugify==4.0.1
     # via cookiecutter
 pyyaml==5.4
     # via
-    #   ansible-base
     #   ansible-compat
+    #   ansible-core
     #   ansible-lint
     #   molecule
 regex==2021.8.21
@@ -162,6 +162,8 @@ requests==2.25.1
     #   docker
     #   molecule-docker
     #   python-jenkins
+resolvelib==0.5.4
+    # via ansible-core
 rich==10.7.0
     # via
     #   ansible-lint
