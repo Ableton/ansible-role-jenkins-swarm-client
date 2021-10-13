@@ -141,6 +141,8 @@ pynacl==1.4.0
 pyparsing==2.4.7
     # via packaging
 pytest==6.0.1
+    # via pytest-testinfra
+pytest-testinfra==6.4.0
     # via testinfra
 python-dateutil==2.8.1
     # via arrow
@@ -195,7 +197,7 @@ tenacity==8.0.1
     # via ansible-lint
 testfixtures==6.18.1
     # via flake8-isort
-testinfra==5.2.2
+testinfra==6.0.0
     # via -r requirements-dev.in
 text-unidecode==1.3
     # via python-slugify
