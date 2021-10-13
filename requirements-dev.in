@@ -6,5 +6,5 @@ flake8-docstrings
 flake8-isort
 molecule
 molecule-docker
+pytest-testinfra
 python-jenkins
-testinfra
