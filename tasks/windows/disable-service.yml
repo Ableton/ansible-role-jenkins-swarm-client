@@ -1,0 +1,2 @@
+---
+- include_tasks: "disable-service-{{ swarm_client_windows_start_type }}.yml"

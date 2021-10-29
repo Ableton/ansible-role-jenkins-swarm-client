@@ -1,0 +1,5 @@
+---
+# Shutdown the service first
+- include_tasks: "{{ ansible_os_family | lower }}/shutdown.yml"
+
+- include_tasks: "{{ ansible_os_family | lower }}/disable-service.yml"

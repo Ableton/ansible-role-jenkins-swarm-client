@@ -1,0 +1,3 @@
+---
+- name: Disable service
+  include_tasks: "disable-service-{{ ansible_service_mgr }}.yml"
