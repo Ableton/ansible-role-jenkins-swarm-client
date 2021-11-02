@@ -27,7 +27,7 @@
     users:
       - "{{ jenkins_config_owner }}"
 
-- name: Set Jenkins Swarm Client to run as Jenkins user
+- name: Set service to run as Jenkins user
   win_service:
     name: "{{ jenkins_swarm_service_name }}"
     username: "{{ jenkins_config_owner }}"

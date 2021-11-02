@@ -5,7 +5,7 @@
     name: "daemon"
     state: present
 
-- name: Generate Jenkins Swarm Client launcher script
+- name: Generate SysVinit launcher script
   become: true
   template:
     src: "jenkins-swarm-client-sysvinit.sh.j2"
@@ -14,7 +14,7 @@
     group: "root"
     mode: "0755"
 
-- name: Install Jenkins Swarm Client service
+- name: Install SysVinit service
   become: true
   sysvinit:
     name: "jenkins-swarm-client"

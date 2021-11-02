@@ -5,13 +5,13 @@
 - name: Include unix-specific defaults
   include_vars: "{{ role_path }}/vars/unix.yml"
 
-- name: Read swarm client PID file
+- name: Read service PID file
   slurp:
     src: "{{ jenkins_swarm_pid_file }}"
   failed_when: false
   register: service_pid_file
 
-- name: Check if swarm client service is running
+- name: Check if service is running
   command: "ps -p {{ service_pid_file.content | b64decode }}"
   changed_when: false
   register: swarm_client_running
@@ -23,14 +23,14 @@
     should_start_swarm_client: >
       service_pid_file.content is not defined or swarm_client_running.rc != 0
 
-- name: Start swarm client service
+- name: Start launchctl service
   block:
     - name: Get current UID
       command: "id -u"
       changed_when: false
       register: uid
 
-    - name: Run swarm client launcher script
+    - name: Start launchctl service
       command: "launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
       changed_when: false
 
@@ -42,7 +42,7 @@
       delay: 1
       retries: 10
 
-    - name: Assert that swarm client service is running
+    - name: Assert that service is running
       command: "ps -p {{ service_pid_file.content | b64decode }}"
       changed_when: false
   when: should_start_swarm_client
