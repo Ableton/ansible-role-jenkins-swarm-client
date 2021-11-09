@@ -32,7 +32,6 @@
 
     - name: Start launchctl service
       command: "launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
-      changed_when: false
 
     - name: Read PID file
       slurp:
