@@ -30,6 +30,15 @@
       changed_when: false
       register: uid
 
+    - name: Get list of disabled services
+      command: "launchctl print-disabled gui/{{ uid.stdout }}"
+      changed_when: false
+      register: disabled_services
+
+    - name: Enable launchctl service
+      command: "launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
+      when: jenkins_swarm_client_disabled in disabled_services.stdout_lines
+
     - name: Start launchctl service
       command: "launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
 
