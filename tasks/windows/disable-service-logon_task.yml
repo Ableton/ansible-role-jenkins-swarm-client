@@ -1,0 +1,5 @@
+---
+- name: Remove scheduled task to start service at logon
+  win_scheduled_task:
+    name: "{{ jenkins_swarm_service_name }}"
+    state: absent

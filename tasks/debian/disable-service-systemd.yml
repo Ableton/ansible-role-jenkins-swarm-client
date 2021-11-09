@@ -1,0 +1,9 @@
+---
+- name: Disable systemd service
+  become: true
+  systemd:
+    name: "jenkins-swarm-client"
+    enabled: false
+    daemon_reload: true
+    no_block: true
+    state: stopped

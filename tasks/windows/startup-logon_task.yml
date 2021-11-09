@@ -1,6 +1,6 @@
 ---
 - include_tasks: "check-if-running.yml"
 
-- name: Start Swarm Client service
+- name: Manually run scheduled task for service
   win_shell: "Start-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'"
   when: not swarm_client_service_running

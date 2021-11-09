@@ -1,0 +1,7 @@
+---
+- name: Disable SysVinit service
+  become: true
+  sysvinit:
+    name: "jenkins-swarm-client"
+    enabled: false
+    state: stopped

@@ -1,5 +1,5 @@
 ---
-- name: Add scheduled task to start Swarm Client during logon
+- name: Add scheduled task to start service at logon
   win_scheduled_task:
     name: "{{ jenkins_swarm_service_name }}"
     actions:

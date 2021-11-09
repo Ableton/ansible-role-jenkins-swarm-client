@@ -2,15 +2,12 @@
 - name: Include platform-specific defaults
   include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- name: Include unix-specific defaults
-  include_vars: "{{ role_path }}/vars/unix.yml"
-
 - name: Get current UID
   command: "id -u"
   changed_when: false
   register: uid
 
-- name: Kill Jenkins swarm client
+- name: Stop launchctl service
   command: "launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
   ignore_errors: true  # noqa ignore-errors
   changed_when: false
