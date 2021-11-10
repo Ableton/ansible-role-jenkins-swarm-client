@@ -18,6 +18,8 @@
     arguments: "{{ jenkins_swarm_launch_args }}"
     description: "{{ jenkins_swarm_service_description }}"
     working_directory: "{{ jenkins_swarm_home }}"
+    username: "{{ jenkins_config_owner }}"
+    password: "{{ jenkins_user_password }}"
     state: stopped
 
 - name: Ensure that Jenkins user can run services
@@ -26,9 +28,3 @@
     action: add
     users:
       - "{{ jenkins_config_owner }}"
-
-- name: Set service to run as Jenkins user
-  win_service:
-    name: "{{ jenkins_swarm_service_name }}"
-    username: "{{ jenkins_config_owner }}"
-    password: "{{ jenkins_user_password }}"
