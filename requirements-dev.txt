@@ -140,7 +140,7 @@ pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
     # via pytest-testinfra
-pytest-testinfra==6.5.0
+pytest-testinfra==6.6.0
     # via -r requirements-dev.in
 python-dateutil==2.8.1
     # via arrow
@@ -167,10 +167,10 @@ rich==10.7.0
     #   ansible-lint
     #   enrich
     #   molecule
-ruamel.yaml==0.17.20
+ruamel-yaml==0.17.20
     # via ansible-lint
-ruamel.yaml.clib==0.2.6
-    # via ruamel.yaml
+ruamel-yaml-clib==0.2.6
+    # via ruamel-yaml
 selinux==0.2.1
     # via molecule-docker
 six==1.15.0
