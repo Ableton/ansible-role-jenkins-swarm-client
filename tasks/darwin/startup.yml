@@ -39,7 +39,7 @@
       command: "launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
       when: jenkins_swarm_client_disabled in disabled_services.stdout_lines
 
-    - name: Start launchctl service
+    - name: Start launchctl service  # noqa no-changed-when
       command: "launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
 
     - name: Read PID file
