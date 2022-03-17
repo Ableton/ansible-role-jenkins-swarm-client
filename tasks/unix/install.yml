@@ -40,6 +40,7 @@
     dest: "{{ jenkins_swarm_jar_path }}"
     owner: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
+    mode: "0644"
   vars:
     ansible_python_interpreter: "{{ swarm_client_get_url_python }}"
 
