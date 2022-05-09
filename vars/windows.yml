@@ -4,9 +4,6 @@
 # let Java modify the system path accordingly.
 java_exe: "java.exe"
 
-# Node platform name, which is used in the labels set on the node
-jenkins_node_platform: "win"
-
 # Destination path for the Swarm Client JAR file
 jenkins_swarm_config_file: "{{ jenkins_swarm_home }}\\swarm-client-config.yml"
 
