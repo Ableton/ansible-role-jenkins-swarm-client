@@ -15,12 +15,14 @@ ansible-core==2.12.5
     # via
     #   ansible
     #   ansible-lint
-ansible-lint==6.0.2
+ansible-lint==6.1.0
     # via -r requirements-dev.in
 arrow==0.15.8
     # via jinja2-time
 attrs==19.3.0
-    # via pytest
+    # via
+    #   jsonschema
+    #   pytest
 bcrypt==3.1.7
     # via paramiko
 binaryornot==0.4.4
@@ -79,6 +81,8 @@ flake8-isort==4.1.1
     # via -r requirements-dev.in
 idna==2.10
     # via requests
+importlib-resources==5.7.1
+    # via jsonschema
 iniconfig==1.0.0
     # via pytest
 isort==5.9.3
@@ -91,6 +95,8 @@ jinja2==2.11.3
     #   molecule
 jinja2-time==0.2.0
     # via cookiecutter
+jsonschema==4.5.1
+    # via ansible-lint
 markupsafe==1.1.1
     # via jinja2
 mccabe==0.6.1
@@ -143,8 +149,12 @@ pynacl==1.4.0
     # via paramiko
 pyparsing==2.4.7
     # via packaging
+pyrsistent==0.18.1
+    # via jsonschema
 pytest==6.2.5
-    # via pytest-testinfra
+    # via
+    #   ansible-lint
+    #   pytest-testinfra
 pytest-testinfra==6.7.0
     # via -r requirements-dev.in
 python-dateutil==2.8.1
@@ -212,6 +222,8 @@ websocket-client==0.57.0
     # via docker
 yamllint==1.26.3
     # via ansible-lint
+zipp==3.8.0
+    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
