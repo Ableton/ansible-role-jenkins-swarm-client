@@ -4,7 +4,7 @@ galaxy_info:
   company: Ableton AG
   description: Installs the Jenkins Swarm Client service
   license: MIT
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
   role_name: jenkins_swarm_client
 
   galaxy_tags:
@@ -25,4 +25,4 @@ galaxy_info:
         - all
 
 dependencies:
-  - ableton.pkg_mgr_path
+  - role: "ableton.pkg_mgr_path"
