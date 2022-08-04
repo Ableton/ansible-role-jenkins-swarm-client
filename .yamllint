@@ -1,4 +1,8 @@
 ---
+ignore: |
+  .ansible
+  .venv
+
 extends: default
 
 rules:

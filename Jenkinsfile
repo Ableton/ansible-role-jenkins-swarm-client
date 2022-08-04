@@ -38,6 +38,7 @@ devToolsProject.run(
           data.venv.run('molecule --debug test')
         }
       },
+      yamllint: { data.venv.run('yamllint --strict .') },
     )
   },
   deployWhen: { devToolsProject.shouldDeploy(defaultBranch: 'main') },
