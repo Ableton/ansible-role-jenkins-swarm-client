@@ -8,17 +8,6 @@
 - name: Run user setup tasks
   include_tasks: "unix/add-jenkins-user.yml"
 
-- name: Get path to default Python executable
-  command: "which python"
-  changed_when: false
-  ignore_errors: true
-  register: python_path
-
-- name: Initialize swarm_client_get_url_python variable
-  set_fact:
-    swarm_client_get_url_python: "{{ python_path.stdout }}"
-  when: python_path is succeeded
-
 # Older versions of macOS can have problems downloading from HTTPS websites thanks to
 # outdated OpenSSL versions. As a workaround, we force python3 if it is available.
 # See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
@@ -32,6 +21,22 @@
   set_fact:
     swarm_client_get_url_python: "{{ python3_path.stdout }}"
   when: python3_path is succeeded
+
+# Fall back to Python2 if Python3 is unavailable
+- name: See if Python2 is installed on the host
+  command: "which python"
+  changed_when: false
+  ignore_errors: true
+  register: python2_path
+  when: python3_path is failed
+
+- name: Use Python2 to download Swarm Client if available
+  set_fact:
+    swarm_client_get_url_python: "{{ python_path.stdout }}"
+  when:
+    - python3_path is failed
+    - python2_path is defined
+    - python2_path is succeeded
 
 - name: Assert that swarm_client_get_url_python is defined
   assert:
