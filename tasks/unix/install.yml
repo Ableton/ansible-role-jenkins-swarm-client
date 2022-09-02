@@ -8,28 +8,42 @@
 - name: Run user setup tasks
   include_tasks: "unix/add-jenkins-user.yml"
 
-- name: Get path to default Python executable
-  command: "which python"
-  changed_when: false
-  register: python_path
+- name: Detect Python3 path
+  block:
+    # Older versions of macOS can have problems downloading from HTTPS websites thanks to
+    # outdated OpenSSL versions. As a workaround, we force python3 if it is available.
+    # See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
+    - name: See if Python3 is installed on the host
+      command: "which python3"
+      changed_when: false
+      ignore_errors: true
+      register: python3_path
 
-- name: Initialize swarm_client_get_url_python variable
-  set_fact:
-    swarm_client_get_url_python: "{{ python_path.stdout }}"
+    - name: Use Python3 to download Swarm Client if available
+      set_fact:
+        swarm_client_get_url_python: "{{ python3_path.stdout }}"
+      when: python3_path is succeeded
 
-# Older versions of macOS can have problems downloading from HTTPS websites thanks to
-# outdated OpenSSL versions. As a workaround, we force python3 if it is available.
-# See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
-- name: See if Python3 is installed on the host
-  command: "which python3"
-  changed_when: false
-  ignore_errors: true
-  register: python3_path
+- name: Detect Python2 path
+  block:
+    # Fall back to Python2 if Python3 is unavailable
+    - name: See if Python2 is installed on the host
+      command: "which python"
+      changed_when: false
+      ignore_errors: true
+      register: python2_path
 
-- name: Use Python3 to download Swarm Client if available
-  set_fact:
-    swarm_client_get_url_python: "{{ python3_path.stdout }}"
-  when: python3_path is succeeded
+    - name: Use Python2 to download Swarm Client if available
+      set_fact:
+        swarm_client_get_url_python: "{{ python_path.stdout }}"
+      when:
+        - python2_path is defined
+        - python2_path is succeeded
+  when: python3_path is failed
+
+- name: Assert that swarm_client_get_url_python is defined
+  assert:
+    that: swarm_client_get_url_python is defined
 
 - name: Download Swarm Client JAR
   become: true
