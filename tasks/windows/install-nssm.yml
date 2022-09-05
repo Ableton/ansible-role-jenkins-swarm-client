@@ -6,7 +6,7 @@
 # to make sure that if the arguments in jenkins_swarm_cmd change then they are added to
 # the NSSM service.
 - name: Remove Windows service
-  win_service:
+  ansible.windows.win_service:
     name: "{{ jenkins_swarm_service_name }}"
     state: absent
   ignore_errors: true  # noqa ignore-errors
@@ -23,7 +23,7 @@
     state: stopped
 
 - name: Ensure that Jenkins user can run services
-  win_user_right:
+  ansible.windows.win_user_right:
     name: "SeServiceLogonRight"
     action: add
     users:
