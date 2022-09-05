@@ -12,7 +12,7 @@
   ignore_errors: true  # noqa ignore-errors
 
 - name: Create Windows service with NSSM
-  win_nssm:
+  community.windows.win_nssm:
     name: "{{ jenkins_swarm_service_name }}"
     application: "{{ get_command_java.stdout | trim }}"
     arguments: "{{ jenkins_swarm_launch_args }}"
