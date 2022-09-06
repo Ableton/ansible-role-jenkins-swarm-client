@@ -1,7 +1,7 @@
 ---
 - name: Disable SysVinit service
   become: true
-  sysvinit:
+  ansible.builtin.sysvinit:
     name: "jenkins-swarm-client"
     enabled: false
     state: stopped

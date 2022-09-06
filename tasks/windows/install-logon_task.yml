@@ -1,6 +1,6 @@
 ---
 - name: Add scheduled task to start service at logon
-  win_scheduled_task:
+  community.windows.win_scheduled_task:
     name: "{{ jenkins_swarm_service_name }}"
     actions:
       # Task Scheduler is a bit picky about quotes, and we need to make sure that the

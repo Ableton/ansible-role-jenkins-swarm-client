@@ -1,13 +1,13 @@
 ---
 - name: Ensure daemon is installed
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "daemon"
     state: present
 
 - name: Generate SysVinit launcher script
   become: true
-  template:
+  ansible.builtin.template:
     src: "jenkins-swarm-client-sysvinit.sh.j2"
     dest: "/etc/init.d/jenkins-swarm-client"
     owner: "root"
@@ -16,7 +16,7 @@
 
 - name: Install SysVinit service
   become: true
-  sysvinit:
+  ansible.builtin.sysvinit:
     name: "jenkins-swarm-client"
     enabled: true
     state: stopped

@@ -1,7 +1,8 @@
 ---
-- include_tasks: "check-if-running.yml"
+- ansible.builtin.include_tasks: "check-if-running.yml"
 
 - name: Stop service process
-  win_shell: "Stop-Process -Id {{ jenkins_swarm_pid.content | b64decode }}"
+  ansible.windows.win_shell: >
+    Stop-Process -Id {{ jenkins_swarm_pid.content | b64decode }}
   ignore_errors: true  # noqa ignore-errors
   when: swarm_client_service_running

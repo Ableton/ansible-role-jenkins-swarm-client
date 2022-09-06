@@ -1,6 +1,6 @@
 ---
 - name: Sanity check required variables
-  assert:
+  ansible.builtin.assert:
     that:
       - jenkins_config_group != ''
       - jenkins_config_owner != ''

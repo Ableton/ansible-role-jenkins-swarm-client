@@ -1,5 +1,7 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- include_tasks: "tasks/windows/startup-{{ swarm_client_windows_start_type }}.yml"
+- name: Include task file for Windows service start type
+  ansible.builtin.include_tasks:
+    file: "tasks/windows/startup-{{ swarm_client_windows_start_type }}.yml"

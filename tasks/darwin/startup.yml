@@ -1,51 +1,53 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Include unix-specific defaults
-  include_vars: "{{ role_path }}/vars/unix.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Read service PID file
-  slurp:
+  ansible.builtin.slurp:
     src: "{{ jenkins_swarm_pid_file }}"
   failed_when: false
   register: service_pid_file
 
 - name: Check if service is running
-  command: "ps -p {{ service_pid_file.content | b64decode }}"
+  ansible.builtin.command: "ps -p {{ service_pid_file.content | b64decode }}"
   changed_when: false
   register: swarm_client_running
   failed_when: false
   when: service_pid_file.content is defined
 
 - name: Initialize should_start_swarm_client fact
-  set_fact:
+  ansible.builtin.set_fact:
     should_start_swarm_client: >
       service_pid_file.content is not defined or swarm_client_running.rc != 0
 
 - name: Start launchctl service
   block:
     - name: Get current UID
-      command: "id -u"
+      ansible.builtin.command: "id -u"
       changed_when: false
       register: uid
 
     - name: Get list of disabled services
-      command: "launchctl print-disabled gui/{{ uid.stdout }}"
+      ansible.builtin.command: "launchctl print-disabled gui/{{ uid.stdout }}"
       changed_when: false
       register: disabled_services
 
     - name: Enable launchctl service
-      command: "launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
+      ansible.builtin.command: >
+        launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
       when: jenkins_swarm_client_disabled in disabled_services.stdout_lines
 
     # TODO: Remove this suppression when ansible-lint learns to parse block conditions
     # See: https://github.com/ansible/ansible-lint/issues/1894
     - name: Start launchctl service  # noqa no-changed-when
-      command: "launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}"
+      ansible.builtin.command: >
+        launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}
 
     - name: Read PID file
-      slurp:
+      ansible.builtin.slurp:
         src: "{{ jenkins_swarm_pid_file }}"
       register: service_pid_file
       until: service_pid_file is succeeded
@@ -53,6 +55,6 @@
       retries: 10
 
     - name: Assert that service is running
-      command: "ps -p {{ service_pid_file.content | b64decode }}"
+      ansible.builtin.command: "ps -p {{ service_pid_file.content | b64decode }}"
       changed_when: false
   when: should_start_swarm_client

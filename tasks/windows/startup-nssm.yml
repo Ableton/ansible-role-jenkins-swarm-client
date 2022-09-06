@@ -1,6 +1,6 @@
 ---
 - name: Start Windows service
-  win_service:
+  ansible.windows.win_service:
     name: "{{ jenkins_swarm_service_name }}"
     start_mode: auto
     state: started

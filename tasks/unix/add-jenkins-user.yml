@@ -1,17 +1,17 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Ensure Jenkins Swarm Client home directory exists
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
     mode: "0755"
 
 - name: Ensure Jenkins Swarm group exists
   become: true
-  group:
+  ansible.builtin.group:
     name: "{{ jenkins_config_group }}"
     state: present
 
@@ -22,14 +22,14 @@
 # This means that the Jenkins user should *not* be created independently of Ansible,
 # otherwise the other user attributes below will not be properly set.
 - name: See whether Jenkins user exists
-  command: "id -u {{ jenkins_config_owner }}"
+  ansible.builtin.command: "id -u {{ jenkins_config_owner }}"
   ignore_errors: true
   changed_when: false
   register: test_jenkins_user
 
 - name: Create Jenkins Swarm user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ jenkins_config_owner }}"
     group: "{{ jenkins_config_group }}"
     home: "{{ jenkins_swarm_home }}"
@@ -39,7 +39,7 @@
 
 - name: Set correct ownership of Jenkins Swarm Client home directory
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ jenkins_swarm_home }}"
     state: directory
     owner: "{{ jenkins_config_owner }}"
