@@ -1,9 +1,9 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Run user setup tasks
-  include_tasks: "windows/add-jenkins-user.yml"
+  ansible.builtin.include_tasks: "windows/add-jenkins-user.yml"
 
 - name: Ensure Jenkins working directory exists
   win_file:
@@ -45,4 +45,6 @@
   changed_when: false
   register: get_command_java
 
-- include_tasks: "tasks/windows/install-{{ swarm_client_windows_start_type }}.yml"
+- name: Include task file for Windows service start type
+  ansible.builtin.include_tasks:
+    file: "tasks/windows/install-{{ swarm_client_windows_start_type }}.yml"

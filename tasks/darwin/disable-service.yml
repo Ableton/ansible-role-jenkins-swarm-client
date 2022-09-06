@@ -1,17 +1,18 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Get current UID
-  command: "id -u"
+  ansible.builtin.command: "id -u"
   changed_when: false
   register: uid
 
 - name: Get list of disabled services
-  command: "launchctl print-disabled gui/{{ uid.stdout }}"
+  ansible.builtin.command: "launchctl print-disabled gui/{{ uid.stdout }}"
   changed_when: false
   register: disabled_services
 
 - name: Disable launchctl service
-  command: "launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
+  ansible.builtin.command: >
+    launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
   when: jenkins_swarm_client_disabled not in disabled_services.stdout_lines

@@ -1,7 +1,7 @@
 ---
 - name: Ensure service is started
   become: true
-  service:
+  ansible.builtin.service:
     name: jenkins-swarm-client
     state: started
     # This normally isn't required, but we also test this role in Docker containers that

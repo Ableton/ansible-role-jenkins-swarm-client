@@ -1,5 +1,5 @@
 ---
-- include_tasks: "check-if-running.yml"
+- ansible.builtin.include_tasks: "check-if-running.yml"
 
 - name: Manually run scheduled task for service
   win_shell: "Start-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'"

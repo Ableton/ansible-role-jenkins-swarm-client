@@ -1,6 +1,6 @@
 ---
 - name: Run installation tasks common to Unix-like systems
-  include_tasks: "unix/install.yml"
+  ansible.builtin.include_tasks: "unix/install.yml"
 
 - name: Install service
-  include_tasks: "install-{{ ansible_service_mgr }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_service_mgr }}.yml"

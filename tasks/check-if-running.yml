@@ -1,22 +1,22 @@
 ---
 - name: Initialize swarm_client_service_running fact
-  set_fact:
+  ansible.builtin.set_fact:
     swarm_client_service_running: false
 
 - name: Sanity check the jenkins_swarm_pid_file variable
-  assert:
+  ansible.builtin.assert:
     that:
       - jenkins_swarm_pid_file != ''
     quiet: true
 
 - name: Slurp the Swarm Client PID file
-  slurp:
+  ansible.builtin.slurp:
     path: "{{ jenkins_swarm_pid_file }}"
   register: jenkins_swarm_pid
   ignore_errors: true
 
 - name: Check if Swarm Client service is running on Unix host
-  command: "ps -p {{ jenkins_swarm_pid.content | b64decode }}"
+  ansible.builtin.command: "ps -p {{ jenkins_swarm_pid.content | b64decode }}"
   changed_when: false
   register: swarm_client_get_process
   ignore_errors: true
@@ -36,12 +36,12 @@
     jenkins_swarm_pid.content is defined
 
 - name: Set swarm_client_service_running fact
-  set_fact:
+  ansible.builtin.set_fact:
     swarm_client_service_running: true
   when: swarm_client_get_process.rc is defined and swarm_client_get_process.rc == 0
 
 - name: Remove stale PID file on Unix host
-  file:
+  ansible.builtin.file:
     path: "{{ jenkins_swarm_pid_file }}"
     state: absent
   when: ansible_os_family != 'Windows' and not swarm_client_service_running

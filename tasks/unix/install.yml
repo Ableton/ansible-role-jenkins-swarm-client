@@ -1,12 +1,12 @@
 ---
 - name: Include platform-specific defaults
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Include unix-specific defaults
-  include_vars: "{{ role_path }}/vars/unix.yml"
+  ansible.builtin.include_vars: "{{ role_path }}/vars/unix.yml"
 
 - name: Run user setup tasks
-  include_tasks: "unix/add-jenkins-user.yml"
+  ansible.builtin.include_tasks: "unix/add-jenkins-user.yml"
 
 - name: Detect Python3 path
   block:
@@ -14,13 +14,13 @@
     # outdated OpenSSL versions. As a workaround, we force python3 if it is available.
     # See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
     - name: See if Python3 is installed on the host
-      command: "which python3"
+      ansible.builtin.command: "which python3"
       changed_when: false
       ignore_errors: true
       register: python3_path
 
     - name: Use Python3 to download Swarm Client if available
-      set_fact:
+      ansible.builtin.set_fact:
         swarm_client_get_url_python: "{{ python3_path.stdout }}"
       when: python3_path is succeeded
 
@@ -28,13 +28,13 @@
   block:
     # Fall back to Python2 if Python3 is unavailable
     - name: See if Python2 is installed on the host
-      command: "which python"
+      ansible.builtin.command: "which python"
       changed_when: false
       ignore_errors: true
       register: python2_path
 
     - name: Use Python2 to download Swarm Client if available
-      set_fact:
+      ansible.builtin.set_fact:
         swarm_client_get_url_python: "{{ python_path.stdout }}"
       when:
         - python2_path is defined
@@ -42,12 +42,12 @@
   when: python3_path is failed
 
 - name: Assert that swarm_client_get_url_python is defined
-  assert:
+  ansible.builtin.assert:
     that: swarm_client_get_url_python is defined
 
 - name: Download Swarm Client JAR
   become: true
-  get_url:
+  ansible.builtin.get_url:
     url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client\
       /{{ jenkins_swarm_client_version }}\
       /swarm-client-{{ jenkins_swarm_client_version }}.jar"
@@ -60,7 +60,7 @@
 
 - name: Copy logging properties file
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "logging.properties"
     dest: "{{ jenkins_swarm_logging_properties }}"
     owner: "{{ jenkins_config_owner }}"
@@ -69,7 +69,7 @@
 
 - name: Copy configuration file
   become: true
-  template:
+  ansible.builtin.template:
     src: "swarm-client-config.yml.j2"
     dest: "{{ jenkins_swarm_home }}/swarm-client-config.yml"
     owner: "{{ jenkins_config_owner }}"
