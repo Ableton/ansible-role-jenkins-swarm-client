@@ -8,7 +8,7 @@ ansible-compat==2.1.0
     # via
     #   ansible-lint
     #   molecule
-ansible-core==2.13.1
+ansible-core==2.13.3
     # via
     #   -r requirements-dev.in
     #   ansible-lint
@@ -71,6 +71,8 @@ flake8-isort==4.2.0
     # via -r requirements-dev.in
 idna==2.10
     # via requests
+importlib-resources==5.9.0
+    # via jsonschema
 iniconfig==1.0.0
     # via pytest
 isort==5.9.3
@@ -191,6 +193,8 @@ toml==0.10.1
     # via pytest
 tomli==1.2.1
     # via black
+typing-extensions==4.3.0
+    # via black
 urllib3==1.26.5
     # via requests
 wcmatch==8.2
@@ -199,6 +203,8 @@ websocket-client==0.57.0
     # via docker
 yamllint==1.26.3
     # via ansible-lint
+zipp==3.8.1
+    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
