@@ -1,0 +1,93 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Get Swarm Client user group
+      ansible.builtin.group:
+        name: "jgroup"
+      register: swarm_client_group
+
+    - name: Assert that the Swarm Client user group was created correctly
+      ansible.builtin.assert:
+        that:
+          - swarm_client_group is not changed
+          - swarm_client_group.name == "jgroup"
+
+    - name: Get Swarm Client user
+      ansible.builtin.user:
+        name: "juser"
+      register: swarm_client_user
+
+    - name: Assert that Swarm Client user was created correctly
+      ansible.builtin.assert:
+        that:
+          - swarm_client_user is not changed
+          - swarm_client_user.name == "juser"
+          - swarm_client_user.group == swarm_client_group.gid
+          - swarm_client_user.home == "/jenkins"
+          - swarm_client_user.shell == "/bin/bash"
+
+    - name: Stat Jenkins directory
+      ansible.builtin.stat:
+        path: "/jenkins"
+      register: swarm_client_home
+
+    - name: Assert that Jenkins directory was created correctly
+      ansible.builtin.assert:
+        that:
+          - swarm_client_home.stat.exists
+          - swarm_client_home.stat.isdir
+          - swarm_client_home.stat.uid == swarm_client_user.uid
+          - swarm_client_home.stat.gid == swarm_client_group.gid
+          - swarm_client_home.stat.mode == "0755"
+
+    - name: Stat Swarm Client config files
+      ansible.builtin.stat:
+        path: "{{ item }}"
+      loop:
+        - "/jenkins/swarm-client-config.yml"
+        - "/jenkins/logging.properties"
+      register: swarm_client_config_files
+
+    - name: Assert that Swarm Client config files were created correctly
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.isreg
+          - item.stat.size > 0
+      loop: "{{ swarm_client_config_files.results }}"
+
+    # We can't use community.general.pids because we don't want to deal with installing
+    # the psutil Python package.
+    - name: Get PIDs for Java
+      ansible.builtin.command: "pgrep java"
+      changed_when: false
+      register: java_pid
+
+    - name: Assert that only one Java process is running
+      ansible.builtin.assert:
+        that: java_pid.stdout_lines | length == 1
+
+    - name: Get full Java process command line
+      ansible.builtin.command: "pgrep -a java"
+      changed_when: false
+      register: java_cmdline
+
+    - name: Set fact for java_cmdline_expected_list
+      ansible.builtin.set_fact:
+        java_cmdline_expected_list:
+          - "{{ java_pid.stdout }}"
+          - "/usr/bin/java"
+          - "-Djava.util.logging.config.file=/jenkins/logging.properties"
+          - "-jar"
+          - "/jenkins/swarm-client-3.27.jar"
+          - "-config"
+          - "/jenkins/swarm-client-config.yml"
+
+    - name: Set fact for java_cmdline_expected
+      ansible.builtin.set_fact:
+        java_cmdline_expected: "{{ java_cmdline_expected_list | join(' ') }}"
+
+    - name: Assert that Swarm Client service is running with expected arguments
+      ansible.builtin.assert:
+        that: java_cmdline.stdout == java_cmdline_expected
