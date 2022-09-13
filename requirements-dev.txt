@@ -59,8 +59,6 @@ enrich==1.2.7
     #   molecule
 idna==2.10
     # via requests
-importlib-resources==5.9.0
-    # via jsonschema
 iniconfig==1.0.0
     # via pytest
 jinja2==3.1.2
@@ -157,8 +155,6 @@ websocket-client==0.57.0
     # via docker
 yamllint==1.26.3
     # via ansible-lint
-zipp==3.8.1
-    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
