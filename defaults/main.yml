@@ -13,6 +13,12 @@ jenkins_controller_url: ""
 # identifier to the end of this value.
 jenkins_node_name: "{{ inventory_hostname }}"
 
+# Jenkins plugins.yaml file to parse the Swarm Client plugin version from. Since this file
+# is only needed to extract the version number, it is not copied to the host and as such,
+# is expected to be in a path on the Ansible control host. This variable is mutually
+# exclusive with jenkins_swarm_client_version.
+jenkins_plugins_file: ""
+
 # Description shown in the Jenkins node information page for this particular node.
 jenkins_swarm_node_description: "{{ inventory_hostname }}"
 
@@ -25,8 +31,9 @@ jenkins_swarm_config_args: {}
 # Swarm Client version >=3.24.
 jenkins_swarm_prometheus_port: "-1"
 
-# Version of the Jenkins Swarm Client to install.
-jenkins_swarm_client_version: "3.27"
+# Version of the Jenkins Swarm Client to install. This variable is mutually exclusive with
+# jenkins_plugins_file.
+jenkins_swarm_client_version: ""
 
 # Jenkins Swarm Client home directory. Should not contain spaces. (must be defined!)
 jenkins_swarm_home: ""

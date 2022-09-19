@@ -1,0 +1,11 @@
+---
+plugins:
+  - artifactId: "notswarm"
+    source:
+      version: "6.66"
+  - artifactId: "something-else"
+    source:
+      version: "1.23"
+  - artifactId: "swarm"
+    source:
+      version: "3.27"

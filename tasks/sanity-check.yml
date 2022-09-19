@@ -7,3 +7,10 @@
       - jenkins_controller_url != ''
       - jenkins_swarm_home != ''
     quiet: true
+
+- name: Assert that Swarm Client version is defined
+  ansible.builtin.assert:
+    that: >
+      (jenkins_plugins_file != "" and jenkins_swarm_client_version == "") or
+      (jenkins_plugins_file == "" and jenkins_swarm_client_version != "")
+    quiet: true
