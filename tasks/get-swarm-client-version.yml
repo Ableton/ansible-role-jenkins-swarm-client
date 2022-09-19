@@ -1,0 +1,18 @@
+---
+- name: Parse plugins YAML file to a variable
+  ansible.builtin.set_fact:
+    jenkins_plugins_contents: >-
+      {{ lookup('ansible.builtin.file', jenkins_plugins_file) | from_yaml }}
+
+- name: Set jenkins_swarm_client_version fact
+  ansible.builtin.set_fact:
+    jenkins_swarm_client_version: "{{ plugin_version_item['source']['version'] }}"
+  loop: "{{ jenkins_plugins_contents['plugins'] }}"
+  loop_control:
+    loop_var: plugin_version_item
+  when: plugin_version_item['artifactId'] == 'swarm'
+
+- name: Abort execution if plugin version was not found
+  ansible.builtin.fail:
+    msg: "Swarm plugin version not found in plugins YAML file {{ jenkins_plugins_file }}"
+  when: jenkins_swarm_client_version == ""

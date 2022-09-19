@@ -5,6 +5,7 @@
     jenkins_config_group: "jgroup"
     jenkins_config_owner: "juser"
     jenkins_controller_url: "http://127.0.0.1:8080"
+    jenkins_plugins_file: "{{ playbook_dir }}/files/plugins.yaml"
     jenkins_node_name: "molecule-test-node"
     jenkins_swarm_config_args:
       environmentVariables:

@@ -1,6 +1,9 @@
 ---
 - ansible.builtin.import_tasks: "sanity-check.yml"
 
+- ansible.builtin.import_tasks: "get-swarm-client-version.yml"
+  when: jenkins_swarm_client_version == ""
+
 - ansible.builtin.import_tasks: "shutdown.yml"
 
 - ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/install.yml"
