@@ -1,12 +1,17 @@
 ---
-- ansible.builtin.import_tasks: "sanity-check.yml"
+- name: Include tasks for sanity checks
+  ansible.builtin.import_tasks: "sanity-check.yml"
 
-- ansible.builtin.import_tasks: "get-swarm-client-version.yml"
+- name: Include tassk to get Swarm Client version
+  ansible.builtin.import_tasks: "get-swarm-client-version.yml"
   when: jenkins_swarm_client_version == ""
 
-- ansible.builtin.import_tasks: "shutdown.yml"
+- name: Include tasks to shutdown service
+  ansible.builtin.import_tasks: "shutdown.yml"
 
-- ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/install.yml"
+- name: Include OS-specific tasks to install Swarm Client
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/install.yml"
 
-- ansible.builtin.import_tasks: "startup.yml"
+- name: Include tasks to start service
+  ansible.builtin.import_tasks: "startup.yml"
   when: swarm_client_start_service
