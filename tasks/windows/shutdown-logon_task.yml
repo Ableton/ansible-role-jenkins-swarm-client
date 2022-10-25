@@ -1,5 +1,6 @@
 ---
-- ansible.builtin.include_tasks: "check-if-running.yml"
+- name: Include tasks to check if service is running
+  ansible.builtin.include_tasks: "check-if-running.yml"
 
 - name: Stop service process
   ansible.windows.win_shell: >

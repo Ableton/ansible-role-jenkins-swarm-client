@@ -24,6 +24,7 @@
       service_pid_file.content is not defined or swarm_client_running.rc != 0
 
 - name: Start launchctl service
+  when: should_start_swarm_client
   block:
     - name: Get current UID
       ansible.builtin.command: "id -u"
@@ -57,4 +58,3 @@
     - name: Assert that service is running
       ansible.builtin.command: "ps -p {{ service_pid_file.content | b64decode }}"
       changed_when: false
-  when: should_start_swarm_client

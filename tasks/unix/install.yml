@@ -25,6 +25,7 @@
       when: python3_path is succeeded
 
 - name: Detect Python2 path
+  when: python3_path is failed
   block:
     # Fall back to Python2 if Python3 is unavailable
     - name: See if Python2 is installed on the host
@@ -39,7 +40,6 @@
       when:
         - python2_path is defined
         - python2_path is succeeded
-  when: python3_path is failed
 
 - name: Assert that swarm_client_get_url_python is defined
   ansible.builtin.assert:
