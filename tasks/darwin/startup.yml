@@ -45,7 +45,7 @@
     # See: https://github.com/ansible/ansible-lint/issues/1894
     - name: Start launchctl service  # noqa no-changed-when
       ansible.builtin.command: >
-        launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}
+        launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}
 
     - name: Read PID file
       ansible.builtin.slurp:

@@ -6,4 +6,5 @@ jenkins_swarm_client_ident: "org.jenkins-ci.plugins.swarm"
 jenkins_swarm_client_disabled: "\t\"{{ jenkins_swarm_client_ident }}\" => true"
 
 # LaunchDaemon plist file destination path
-jenkins_swarm_daemon_plist: "/Library/LaunchAgents/{{ jenkins_swarm_client_ident }}.plist"
+jenkins_swarm_client_launchd_plist: >-
+  /Library/LaunchAgents/{{ jenkins_swarm_client_ident }}.plist
