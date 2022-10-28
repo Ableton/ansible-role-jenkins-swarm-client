@@ -2,8 +2,8 @@
 - name: Include platform-specific defaults
   ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- name: Get current UID
-  ansible.builtin.command: "id -u"
+- name: Get UID for jenkins_config_owner user
+  ansible.builtin.command: "id -u {{ jenkins_config_owner }}"
   changed_when: false
   register: uid
 

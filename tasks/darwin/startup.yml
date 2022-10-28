@@ -26,8 +26,8 @@
 - name: Start launchctl service
   when: should_start_swarm_client
   block:
-    - name: Get current UID
-      ansible.builtin.command: "id -u"
+    - name: Get UID for jenkins_config_owner user
+      ansible.builtin.command: "id -u {{ jenkins_config_owner }}"
       changed_when: false
       register: uid
 
