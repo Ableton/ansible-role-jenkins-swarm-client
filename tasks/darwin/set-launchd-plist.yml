@@ -1,0 +1,12 @@
+---
+- name: Set fact for jenkins_swarm_client_launchd_plist (root user)
+  ansible.builtin.set_fact:
+    jenkins_swarm_client_launchd_plist: >-
+      /Library/LaunchDaemons/{{ jenkins_swarm_client_ident }}.plist
+  when: "jenkins_config_owner == 'root'"
+
+- name: Set fact for jenkins_swarm_client_launchd_plist (non-root user)
+  ansible.builtin.set_fact:
+    jenkins_swarm_client_launchd_plist: >-
+      /Library/LaunchAgents/{{ jenkins_swarm_client_ident }}.plist
+  when: "jenkins_config_owner != 'root'"

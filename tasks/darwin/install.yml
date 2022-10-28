@@ -15,7 +15,43 @@
   loop_control:
     loop_var: jenkins_swarm_cmd_item
 
-- name: Ensure LaunchDaemon plist file exists
+- name: Set fact for jenkins_swarm_client_legacy_launchd_plist
+  ansible.builtin.set_fact:
+    jenkins_swarm_client_legacy_launchd_plist: >-
+      /Library/LaunchAgents/{{ jenkins_swarm_client_ident }}.plist
+  when: "jenkins_config_owner == 'root'"
+
+- name: See if legacy Swarm Client launchd plist file exists
+  ansible.builtin.stat:
+    path: "{{ jenkins_swarm_client_legacy_launchd_plist }}"
+  register: jenkins_swarm_client_legacy_launchd_plist_file
+  when: jenkins_swarm_client_legacy_launchd_plist is defined
+
+- name: Unload and remove legacy Swarm Client launchd service
+  when:
+    - jenkins_swarm_client_legacy_launchd_plist is defined
+    - jenkins_swarm_client_legacy_launchd_plist_file.stat.exists
+  block:
+    # TODO: Remove this suppression when ansible-lint learns to parse block conditions
+    # See: https://github.com/ansible/ansible-lint/issues/1894
+    - name: Unload legacy Swarm Client service  # noqa no-changed-when
+      become: true
+      ansible.builtin.command: >
+        launchctl bootout gui/{{ uid.stdout }}
+        {{ jenkins_swarm_client_legacy_launchd_plist }}
+      # The service doesn't necessarily have to be running
+      ignore_errors: true  # noqa ignore-errors
+
+    - name: Remove legacy Swarm Client launchd plist file
+      become: true
+      ansible.builtin.file:
+        path: "{{ jenkins_swarm_client_legacy_launchd_plist_file }}"
+        state: absent
+
+- name: Set jenkins_swarm_client_launchd_plist fact
+  ansible.builtin.include_tasks: "set-launchd-plist.yml"
+
+- name: Ensure Swarm Client launchd plist file exists
   become: true
   ansible.builtin.template:
     src: "{{ jenkins_swarm_client_ident }}.plist.j2"

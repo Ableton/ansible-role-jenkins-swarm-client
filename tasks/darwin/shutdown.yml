@@ -7,6 +7,9 @@
   changed_when: false
   register: uid
 
+- name: Set jenkins_swarm_client_launchd_plist fact
+  ansible.builtin.include_tasks: "set-launchd-plist.yml"
+
 - name: Stop launchctl service
   ansible.builtin.command: >
     launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}
