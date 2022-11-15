@@ -8,6 +8,7 @@
 
 - name: Create Swarm Client user/group
   ansible.builtin.import_tasks: "add-jenkins-user.yml"
+  when: swarm_client_create_user
 
 - name: Include tasks to shutdown service
   ansible.builtin.import_tasks: "shutdown.yml"

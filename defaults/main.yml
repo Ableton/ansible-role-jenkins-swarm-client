@@ -41,6 +41,10 @@ jenkins_swarm_home: ""
 # Password for Jenkins service user (only used on Windows).
 jenkins_user_password: ""
 
+# If true, create the user and group for jenkins_config_owner/jenkins_config_group. If
+# false, then this role assumes that the user and its corresponding group already exist.
+swarm_client_create_user: true
+
 # When true, start the Swarm Client service at the end of this role. In some cases, it is
 # necessary *not* to start the service right away, in case additional work must be done on
 # the node before allowing it to run jobs. To start the service manually, you should do:
