@@ -5,9 +5,6 @@
 - name: Include unix-specific defaults
   ansible.builtin.include_vars: "{{ role_path }}/vars/unix.yml"
 
-- name: Run user setup tasks
-  ansible.builtin.include_tasks: "unix/add-jenkins-user.yml"
-
 - name: Detect Python3 path
   block:
     # Older versions of macOS can have problems downloading from HTTPS websites thanks to

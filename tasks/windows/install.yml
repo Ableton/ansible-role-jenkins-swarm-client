@@ -2,9 +2,6 @@
 - name: Include platform-specific defaults
   ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- name: Run user setup tasks
-  ansible.builtin.include_tasks: "windows/add-jenkins-user.yml"
-
 - name: Ensure Jenkins working directory exists
   ansible.windows.win_file:
     path: "{{ jenkins_swarm_home }}"

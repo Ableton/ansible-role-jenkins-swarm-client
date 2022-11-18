@@ -2,9 +2,13 @@
 - name: Include tasks for sanity checks
   ansible.builtin.import_tasks: "sanity-check.yml"
 
-- name: Include tassk to get Swarm Client version
+- name: Include task to get Swarm Client version
   ansible.builtin.import_tasks: "get-swarm-client-version.yml"
   when: jenkins_swarm_client_version == ""
+
+- name: Create Swarm Client user/group
+  ansible.builtin.import_tasks: "add-jenkins-user.yml"
+  when: swarm_client_create_user
 
 - name: Include tasks to shutdown service
   ansible.builtin.import_tasks: "shutdown.yml"

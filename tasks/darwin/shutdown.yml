@@ -2,13 +2,16 @@
 - name: Include platform-specific defaults
   ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
-- name: Get current UID
-  ansible.builtin.command: "id -u"
+- name: Get UID for jenkins_config_owner user
+  ansible.builtin.command: "id -u {{ jenkins_config_owner }}"
   changed_when: false
   register: uid
 
+- name: Set jenkins_swarm_client_launchd_plist fact
+  ansible.builtin.include_tasks: "set-launchd-plist.yml"
+
 - name: Stop launchctl service
   ansible.builtin.command: >
-    launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_daemon_plist }}
+    launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}
   ignore_errors: true  # noqa ignore-errors
   changed_when: false
