@@ -2,8 +2,6 @@
 collections:
   - name: ansible.windows
     version: 1.12.0
-  - name: community.docker
-    version: 3.2.2
   - name: community.windows
     version: 1.11.1
 
