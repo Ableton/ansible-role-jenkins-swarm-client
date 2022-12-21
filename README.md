@@ -7,7 +7,7 @@ given host, which allows it to connect to a Jenkins controller instance as a bui
 Requirements
 ------------
 
-This role requires Ansible >= 2.10 on the Ansible control host, and Java >= 8 to be
+This role requires Ansible >= 2.10 on the Ansible control host, and Java >= 11 to be
 installed on the host itself. This role does **not** install Java; this should be done
 separately either with another role or via the respective package manager for the host's
 platform. This role supports the following platforms:
