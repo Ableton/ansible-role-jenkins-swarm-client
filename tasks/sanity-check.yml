@@ -14,3 +14,24 @@
       (jenkins_plugins_file != "" and jenkins_swarm_client_version == "") or
       (jenkins_plugins_file == "" and jenkins_swarm_client_version != "")
     quiet: true
+
+- name: Include Unix-specific defaults
+  ansible.builtin.include_vars: "{{ role_path }}/vars/unix.yml"
+  when: ansible_os_family != "Windows"
+
+- name: Include Windows-specific defaults
+  ansible.builtin.include_vars: "{{ role_path }}/vars/windows.yml"
+  when: ansible_os_family == "Windows"
+
+- name: See if Java is present in the default PATH
+  ansible.builtin.command: "{{ java_exe }} -version"
+  changed_when: false
+  # We'll assert in the following task to display a nicer error message
+  ignore_errors: true
+  register: java_version
+
+- name: Assert that Java is present in the default PATH
+  ansible.builtin.assert:
+    that: java_version is succeeded
+    quiet: true
+    fail_msg: "{{ java_exe }} was not found or cannot be executed"
