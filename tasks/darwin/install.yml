@@ -32,13 +32,12 @@
     - jenkins_swarm_client_legacy_launchd_plist is defined
     - jenkins_swarm_client_legacy_launchd_plist_file.stat.exists
   block:
-    # TODO: Remove this suppression when ansible-lint learns to parse block conditions
-    # See: https://github.com/ansible/ansible-lint/issues/1894
-    - name: Unload legacy Swarm Client service  # noqa no-changed-when
+    - name: Unload legacy Swarm Client service
       become: true
       ansible.builtin.command: >
         launchctl bootout gui/{{ uid.stdout }}
         {{ jenkins_swarm_client_legacy_launchd_plist }}
+      changed_when: true
       # The service doesn't necessarily have to be running
       ignore_errors: true  # noqa ignore-errors
 

@@ -15,4 +15,5 @@
 - name: Disable launchctl service
   ansible.builtin.command: >
     launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
+  changed_when: true
   when: jenkins_swarm_client_disabled not in disabled_services.stdout_lines

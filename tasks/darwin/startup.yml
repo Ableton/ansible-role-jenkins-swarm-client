@@ -39,16 +39,16 @@
     - name: Enable launchctl service
       ansible.builtin.command: >
         launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
+      changed_when: true
       when: jenkins_swarm_client_disabled in disabled_services.stdout_lines
 
     - name: Set jenkins_swarm_client_launchd_plist fact
       ansible.builtin.include_tasks: "set-launchd-plist.yml"
 
-    # TODO: Remove this suppression when ansible-lint learns to parse block conditions
-    # See: https://github.com/ansible/ansible-lint/issues/1894
-    - name: Start launchctl service  # noqa no-changed-when
+    - name: Start launchctl service
       ansible.builtin.command: >
         launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}
+      changed_when: true
 
     - name: Read PID file
       ansible.builtin.slurp:
