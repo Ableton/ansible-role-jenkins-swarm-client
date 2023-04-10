@@ -6,12 +6,12 @@
 #
 ansible-compat==3.0.1
     # via molecule
-ansible-core==2.14.3
+ansible-core==2.14.4
     # via
     #   -r requirements-dev.in
     #   ansible-compat
     #   ansible-lint
-ansible-lint==6.14.3
+ansible-lint==6.14.4
     # via -r requirements-dev.in
 arrow==1.2.3
     # via jinja2-time
@@ -19,7 +19,7 @@ attrs==22.2.0
     # via jsonschema
 binaryornot==0.4.4
     # via cookiecutter
-black==23.1.0
+black==23.3.0
     # via ansible-lint
 bracex==2.3.post1
     # via wcmatch
@@ -49,7 +49,7 @@ docker==6.0.1
     # via molecule-docker
 enrich==1.2.7
     # via molecule
-filelock==3.10.6
+filelock==3.11.0
     # via ansible-lint
 idna==3.4
     # via requests
@@ -88,9 +88,8 @@ packaging==23.0
     #   black
     #   docker
     #   molecule
-pathspec==0.11.0
+pathspec==0.11.1
     # via
-    #   ansible-lint
     #   black
     #   yamllint
 platformdirs==3.2.0
@@ -122,7 +121,7 @@ requests==2.28.2
     #   molecule-docker
 resolvelib==0.8.1
     # via ansible-core
-rich==13.3.2
+rich==13.3.3
     # via
     #   ansible-lint
     #   enrich
