@@ -69,7 +69,7 @@
 
     - name: Assert that node name was set correctly
       ansible.builtin.assert:
-        that: swarm_client_config_file_node_name == "molecule-test-node"
+        that: swarm_client_config_file_node_name == "molecule%20test%20node"
 
     # We can't use community.general.pids because we don't want to deal with installing
     # the psutil Python package.
