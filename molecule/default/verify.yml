@@ -57,6 +57,20 @@
           - item.stat.size > 0
       loop: "{{ swarm_client_config_files.results }}"
 
+    - name: Slurp main config file
+      ansible.builtin.slurp:
+        src: "/jenkins/swarm-client-config.yml"
+      register: swarm_client_config_file
+
+    - name: Set fact for config file's node name
+      ansible.builtin.set_fact:
+        swarm_client_config_file_node_name: >-
+          {{ (swarm_client_config_file.content | b64decode | from_yaml)['name'] }}
+
+    - name: Assert that node name was set correctly
+      ansible.builtin.assert:
+        that: swarm_client_config_file_node_name == "molecule%20test%20node"
+
     # We can't use community.general.pids because we don't want to deal with installing
     # the psutil Python package.
     - name: Get PIDs for Java
