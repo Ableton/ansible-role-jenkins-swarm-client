@@ -1,9 +1,4 @@
 ---
-# Name of Java executable. Using an absolute path for this value is *not* recommended,
-# since Java updates can change the location of this executable. Instead, it is better to
-# let Java modify the system path accordingly.
-java_exe: "java.exe"
-
 # Destination path for the Swarm Client JAR file
 jenkins_swarm_config_file: "{{ jenkins_swarm_home }}\\swarm-client-config.yml"
 

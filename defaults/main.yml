@@ -8,6 +8,11 @@ jenkins_config_owner: "jenkins"
 # URL to the Jenkins controller instance (must be defined!)
 jenkins_controller_url: ""
 
+# Path to Java executable. If not defined, `/usr/bin/java` is used on Unix systems and
+# `java.exe` is used on Windows, with the assumption that Java will be found in the
+# system's default PATH there.
+jenkins_java_exe: ""
+
 # The name assigned to this node, which is shown to the user in the Jenkins controller.
 # Note that the Jenkins Swarm plugin will append a unique 8-character hexadecimal
 # identifier to the end of this value.
