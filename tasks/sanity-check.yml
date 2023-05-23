@@ -23,13 +23,23 @@
   ansible.builtin.include_vars: "{{ role_path }}/vars/windows.yml"
   when: ansible_os_family == "Windows"
 
-- name: See if Java is present in the default PATH for Unix hosts
+- name: Set java_exe for Unix hosts
+  ansible.builtin.set_fact:
+    java_exe: "{{ jenkins_java_exe | default('/usr/bin/java', true) }}"
+  when: ansible_os_family != "Windows"
+
+- name: See if Java is present for Unix hosts
   ansible.builtin.command: "{{ java_exe }} -version"
   changed_when: false
   # We'll assert in the following task to display a nicer error message
   ignore_errors: true
   register: java_version
   when: ansible_os_family != "Windows"
+
+- name: Set java_exe for Windows hosts
+  ansible.builtin.set_fact:
+    java_exe: "{{ jenkins_java_exe | default('java.exe', true) }}"
+  when: ansible_os_family == "Windows"
 
 - name: See if Java is present in the default PATH for Windows hosts
   ansible.windows.win_command: "{{ java_exe }} -version"
