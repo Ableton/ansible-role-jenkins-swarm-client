@@ -20,6 +20,8 @@
     working_directory: "{{ jenkins_swarm_home }}"
     username: "{{ jenkins_config_owner }}"
     password: "{{ jenkins_user_password }}"
+    stderr_file: "jenkins-swarm-client.stderr.log"
+    stdout_file: "jenkins-swarm-client.stdout.log"
     state: stopped
 
 - name: Ensure that Jenkins user can run services
