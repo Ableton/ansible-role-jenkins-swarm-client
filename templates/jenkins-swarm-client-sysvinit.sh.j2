@@ -12,7 +12,8 @@ RETVAL=0
 
 start() {
   /usr/bin/daemon --name=jenkins-swarm-client --inherit \
-    --output=/var/log/jenkins-swarm-client.log -- \
+    --stderr=/var/log/jenkins-swarm-client.stderr.log \
+    --stdout=/var/log/jenkins-swarm-client.stdout.log -- \
     {{ java_exe }} {{ jenkins_swarm_launch_args | join(" ") }}
   RETVAL=$?
 }
