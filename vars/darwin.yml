@@ -4,3 +4,5 @@ jenkins_swarm_client_ident: "org.jenkins-ci.plugins.swarm"
 
 # String that will appear in "launchctl print-disabled"
 jenkins_swarm_client_disabled: "\t\"{{ jenkins_swarm_client_ident }}\" => true"
+
+jenkins_swarm_client_log_dir: "/Library/Logs/{{ jenkins_swarm_client_ident }}"

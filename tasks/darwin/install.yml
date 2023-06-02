@@ -27,6 +27,19 @@
   register: jenkins_swarm_client_legacy_launchd_plist_file
   when: jenkins_swarm_client_legacy_launchd_plist is defined
 
+- name: Override jenkins_swarm_client_log_dir for non-root installation
+  ansible.builtin.set_fact:
+    jenkins_swarm_client_log_dir: >-
+      /Users/{{ jenkins_config_owner }}/Library/Logs/{{ jenkins_swarm_client_ident }}
+  when: "jenkins_config_owner != 'root'"
+
+- name: Ensure that log directory exists
+  become: "{{ 'true' if jenkins_config_owner == 'root' else 'false' }}"
+  ansible.builtin.file:
+    path: "{{ jenkins_swarm_client_log_dir }}"
+    state: directory
+    mode: "0755"
+
 - name: Unload and remove legacy Swarm Client launchd service
   when:
     - jenkins_swarm_client_legacy_launchd_plist is defined
