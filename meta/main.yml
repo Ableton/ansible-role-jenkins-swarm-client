@@ -24,5 +24,4 @@ galaxy_info:
       versions:
         - all
 
-dependencies:
-  - role: "ableton.pkg_mgr_path"
+dependencies: []
