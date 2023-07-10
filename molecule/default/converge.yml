@@ -16,4 +16,4 @@
     jenkins_swarm_home: "/jenkins"
     swarm_client_create_user: true
   roles:
-    - role: ansible-role-jenkins-swarm-client
+    - role: ableton.jenkins_swarm_client
