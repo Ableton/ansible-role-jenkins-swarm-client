@@ -6,4 +6,6 @@ pidFile: {{ jenkins_swarm_pid_file }}
 prometheusPort: "{{ jenkins_swarm_prometheus_port }}"
 url: "{{ jenkins_controller_url }}"
 
+{% if jenkins_swarm_config_args %}
 {{ jenkins_swarm_config_args | to_nice_yaml(indent=2) }}
+{% endif %}
