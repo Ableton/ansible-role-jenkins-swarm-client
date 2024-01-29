@@ -1,5 +1,6 @@
 ---
-- name: Remove Windows service
+- name: Disable Windows service
   ansible.windows.win_service:
     name: "{{ jenkins_swarm_service_name }}"
-    state: absent
+    start_mode: disabled
+    state: stopped

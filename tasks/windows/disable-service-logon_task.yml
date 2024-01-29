@@ -1,5 +1,5 @@
 ---
-- name: Remove scheduled task to start service at logon
+- name: Disable scheduled task from starting service at logon
   community.windows.win_scheduled_task:
     name: "{{ jenkins_swarm_service_name }}"
-    state: absent
+    enabled: false
