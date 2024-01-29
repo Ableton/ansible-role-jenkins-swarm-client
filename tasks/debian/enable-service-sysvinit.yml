@@ -1,0 +1,7 @@
+---
+- name: Enable SysVinit service
+  become: true
+  ansible.builtin.sysvinit:
+    name: "jenkins-swarm-client"
+    enabled: true
+    state: started

@@ -1,0 +1,3 @@
+---
+- name: Enable service
+  ansible.builtin.include_tasks: "enable-service-{{ ansible_service_mgr }}.yml"

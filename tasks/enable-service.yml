@@ -1,0 +1,7 @@
+---
+- name: Include OS-specific tasks to enable service
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/enable-service.yml"
+
+# Start the service after enabling it
+- name: Include OS-specific tasks to start service
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/startup.yml"
