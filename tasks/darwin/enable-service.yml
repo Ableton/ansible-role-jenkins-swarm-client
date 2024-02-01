@@ -12,18 +12,18 @@
   changed_when: false
   register: disabled_services
 
-- name: Disable launchctl service (pre-Ventura)
+- name: Enable launchctl service (pre-Ventura)
   ansible.builtin.command: >
-    launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
+    launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
   changed_when: true
   when:
     - ansible_distribution_major_version | int < 13
-    - jenkins_swarm_client_disabled_pre_ventura not in disabled_services.stdout_lines
+    - jenkins_swarm_client_disabled_pre_ventura in disabled_services.stdout_lines
 
-- name: Disable launchctl service (post-Ventura)
+- name: Enable launchctl service (post-Ventura)
   ansible.builtin.command: >
-    launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
+    launchctl enable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}
   changed_when: true
   when:
     - ansible_distribution_major_version | int >= 13
-    - jenkins_swarm_client_disabled_post_ventura not in disabled_services.stdout_lines
+    - jenkins_swarm_client_disabled_post_ventura in disabled_services.stdout_lines

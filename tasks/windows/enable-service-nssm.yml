@@ -1,6 +1,5 @@
 ---
-- name: Disable Windows service
+- name: Enable Windows service
   ansible.windows.win_service:
     name: "{{ jenkins_swarm_service_name }}"
-    start_mode: disabled
-    state: stopped
+    start_mode: auto

@@ -1,0 +1,4 @@
+---
+- name: Include task file for Windows service start type
+  ansible.builtin.include_tasks:
+    file: "enable-service-{{ swarm_client_windows_start_type }}.yml"

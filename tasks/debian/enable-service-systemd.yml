@@ -1,0 +1,8 @@
+---
+- name: Enable systemd service
+  become: true
+  ansible.builtin.systemd:
+    name: "jenkins-swarm-client"
+    enabled: true
+    daemon_reload: true
+    state: started
