@@ -1,7 +1,3 @@
 ---
-# Shutdown the service first
-- name: Include OS-specific tasks to shutdown service
-  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/shutdown.yml"
-
 - name: Include OS-specific tasks to disable service
   ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}/disable-service.yml"
