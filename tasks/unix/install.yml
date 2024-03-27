@@ -33,7 +33,7 @@
 
     - name: Use Python2 to download Swarm Client if available
       ansible.builtin.set_fact:
-        swarm_client_get_url_python: "{{ python_path.stdout }}"
+        swarm_client_get_url_python: "{{ python2_path.stdout }}"
       when:
         - python2_path is defined
         - python2_path is succeeded
