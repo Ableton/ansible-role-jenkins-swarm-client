@@ -19,6 +19,9 @@
     logon_type: interactive_token
     # 3 -> Stop other instances of the task before starting a new one
     multiple_instances: 3
+    restart_count: 5
+    # PT1M -> Retry every minute
+    restart_interval: "PT1M"
     run_only_if_idle: false
     run_only_if_network_available: false
     triggers:
