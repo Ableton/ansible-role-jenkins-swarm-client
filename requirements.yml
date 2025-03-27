@@ -3,7 +3,7 @@ collections:
   - name: ansible.windows
     version: 2.8.0
   - name: community.windows
-    version: 2.3.0
+    version: 2.4.0
 
 roles:
   - src: https://github.com/Ableton/ansible-role-pkg-mgr-path
