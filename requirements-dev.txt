@@ -4,11 +4,11 @@
 #
 #    pip-compile --no-emit-index-url --output-file=requirements-dev.txt requirements-dev.in
 #
-ansible-compat==25.1.5
+ansible-compat==25.5.0
     # via
     #   ansible-lint
     #   molecule
-ansible-core==2.18.5
+ansible-core==2.18.6
     # via
     #   -r requirements-dev.in
     #   ansible-compat
@@ -30,14 +30,14 @@ cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.2
     # via requests
-click==8.2.0
+click==8.2.1
     # via
     #   black
     #   click-help-colors
     #   molecule
 click-help-colors==0.9.4
     # via molecule
-cryptography==44.0.3
+cryptography==45.0.3
     # via ansible-core
 distro==1.9.0
     # via selinux
@@ -90,7 +90,7 @@ pathspec==0.12.1
     #   yamllint
 platformdirs==4.3.8
     # via black
-pluggy==1.5.0
+pluggy==1.6.0
     # via molecule
 pycparser==2.22
     # via cffi
@@ -119,11 +119,11 @@ rich==14.0.0
     # via
     #   enrich
     #   molecule
-rpds-py==0.24.0
+rpds-py==0.25.1
     # via
     #   jsonschema
     #   referencing
-ruamel-yaml==0.18.10
+ruamel-yaml==0.18.11
     # via ansible-lint
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
