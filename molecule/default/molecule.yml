@@ -4,9 +4,16 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance
+  - name: ansible-role-jenkins-swarm-client-focal
     image: ubuntu:20.04
     privileged: true
+    groups:
+      - focal
+  - name: ansible-role-jenkins-swarm-client-noble
+    image: ubuntu:24.04
+    privileged: true
+    groups:
+      - noble
 provisioner:
   name: ansible
   log: true
