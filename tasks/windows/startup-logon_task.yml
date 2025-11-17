@@ -1,6 +1,7 @@
 ---
 - name: Include tasks to check if service is running
-  ansible.builtin.include_tasks: "check-if-running.yml"
+  ansible.builtin.include_tasks:
+    file: "check-if-running.yml"
 
 - name: Manually run scheduled task for service
   ansible.windows.win_shell: >

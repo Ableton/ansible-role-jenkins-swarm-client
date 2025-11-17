@@ -1,9 +1,11 @@
 ---
 - name: Include platform-specific defaults
-  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars:
+    file: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
 
 - name: Include unix-specific defaults
-  ansible.builtin.include_vars: "{{ role_path }}/vars/unix.yml"
+  ansible.builtin.include_vars:
+    file: "{{ role_path }}/vars/unix.yml"
 
 - name: Detect Python3 path
   block:

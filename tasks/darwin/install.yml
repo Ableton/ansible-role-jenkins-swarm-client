@@ -1,6 +1,7 @@
 ---
 - name: Run installation tasks common to Unix-like systems
-  ansible.builtin.include_tasks: "unix/install.yml"
+  ansible.builtin.include_tasks:
+    file: "unix/install.yml"
 
 - name: Initialize jenkins_swarm_launchd_args fact
   ansible.builtin.set_fact:
