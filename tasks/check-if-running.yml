@@ -16,7 +16,8 @@
   ignore_errors: true
 
 - name: Check if Swarm Client service is running on Unix host
-  ansible.builtin.command: "ps -p {{ jenkins_swarm_pid.content | b64decode }}"
+  ansible.builtin.command:
+    cmd: "ps -p {{ jenkins_swarm_pid.content | b64decode }}"
   changed_when: false
   register: swarm_client_get_process
   ignore_errors: true

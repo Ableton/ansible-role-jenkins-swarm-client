@@ -13,7 +13,8 @@
     # outdated OpenSSL versions. As a workaround, we force python3 if it is available.
     # See: https://github.com/ansible/ansible/issues/33417#issuecomment-350547975
     - name: See if Python3 is installed on the host
-      ansible.builtin.command: "which python3"
+      ansible.builtin.command:
+        cmd: "which python3"
       changed_when: false
       ignore_errors: true
       register: python3_path
@@ -28,7 +29,8 @@
   block:
     # Fall back to Python2 if Python3 is unavailable
     - name: See if Python2 is installed on the host
-      ansible.builtin.command: "which python"
+      ansible.builtin.command:
+        cmd: "which python"
       changed_when: false
       ignore_errors: true
       register: python2_path

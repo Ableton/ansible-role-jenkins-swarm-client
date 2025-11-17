@@ -14,7 +14,8 @@
   register: service_pid_file
 
 - name: Check if service is running
-  ansible.builtin.command: "ps -p {{ service_pid_file.content | b64decode }}"
+  ansible.builtin.command:
+    cmd: "ps -p {{ service_pid_file.content | b64decode }}"
   changed_when: false
   register: swarm_client_running
   failed_when: false
@@ -29,7 +30,8 @@
   when: should_start_swarm_client
   block:
     - name: Get UID for jenkins_config_owner user
-      ansible.builtin.command: "id -u {{ jenkins_config_owner }}"
+      ansible.builtin.command:
+        cmd: "id -u {{ jenkins_config_owner }}"
       changed_when: false
       register: uid
 
@@ -40,8 +42,12 @@
       ansible.builtin.include_tasks: "set-launchd-plist.yml"
 
     - name: Start launchctl service
-      ansible.builtin.command: >
-        launchctl bootstrap gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}
+      ansible.builtin.command:
+        argv:
+          - "launchctl"
+          - "bootstrap"
+          - "gui/{{ uid.stdout }}"
+          - "{{ jenkins_swarm_client_launchd_plist }}"
       changed_when: true
 
     - name: Read PID file
@@ -53,5 +59,6 @@
       retries: 10
 
     - name: Assert that service is running
-      ansible.builtin.command: "ps -p {{ service_pid_file.content | b64decode }}"
+      ansible.builtin.command:
+        cmd: "ps -p {{ service_pid_file.content | b64decode }}"
       changed_when: false
