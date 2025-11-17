@@ -19,7 +19,7 @@
 
 - name: Include OS-specific tasks to install Swarm Client
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}/install.yml"
+    file: "{{ ansible_facts['os_family'] | lower }}/install.yml"
 
 - name: Include tasks to start service
   ansible.builtin.import_tasks:

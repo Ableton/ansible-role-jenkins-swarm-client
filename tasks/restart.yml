@@ -1,8 +1,8 @@
 ---
 - name: Include OS-specific tasks to shutdown service
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}/shutdown.yml"
+    file: "{{ ansible_facts['os_family'] | lower }}/shutdown.yml"
 
 - name: Include OS-specific tasks to start service
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}/startup.yml"
+    file: "{{ ansible_facts['os_family'] | lower }}/startup.yml"

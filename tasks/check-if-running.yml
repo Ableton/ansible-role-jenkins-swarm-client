@@ -22,7 +22,7 @@
   register: swarm_client_get_process
   ignore_errors: true
   when: >
-    ansible_os_family != 'Windows' and
+    ansible_facts["os_family"] != "Windows" and
     jenkins_swarm_pid is succeeded and
     jenkins_swarm_pid.content is defined
 
@@ -32,7 +32,7 @@
   register: swarm_client_get_process
   ignore_errors: true
   when: >
-    ansible_os_family == 'Windows' and
+    ansible_facts["os_family"] == "Windows" and
     jenkins_swarm_pid is succeeded and
     jenkins_swarm_pid.content is defined
 
@@ -45,10 +45,10 @@
   ansible.builtin.file:
     path: "{{ jenkins_swarm_pid_file }}"
     state: absent
-  when: ansible_os_family != 'Windows' and not swarm_client_service_running
+  when: ansible_facts["os_family"] != "Windows" and not swarm_client_service_running
 
 - name: Remove stale PID file on Windows host
   ansible.windows.win_file:
     path: "{{ jenkins_swarm_pid_file }}"
     state: absent
-  when: ansible_os_family == 'Windows' and not swarm_client_service_running
+  when: ansible_facts["os_family"] == "Windows" and not swarm_client_service_running

@@ -1,4 +1,4 @@
 ---
 - name: Include OS-specific tasks to disable service
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}/disable-service.yml"
+    file: "{{ ansible_facts['os_family'] | lower }}/disable-service.yml"

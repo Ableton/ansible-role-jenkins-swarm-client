@@ -1,4 +1,4 @@
 ---
 - name: Include OS-specific tasks to add Jenkins user
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}/add-jenkins-user.yml"
+    file: "{{ ansible_facts['os_family'] | lower }}/add-jenkins-user.yml"

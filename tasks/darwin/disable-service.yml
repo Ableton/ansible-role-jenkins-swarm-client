@@ -1,7 +1,7 @@
 ---
 - name: Include platform-specific defaults
   ansible.builtin.include_vars:
-    file: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+    file: "{{ role_path }}/vars/{{ ansible_facts['os_family'] | lower }}.yml"
 
 - name: Get UID for jenkins_config_owner user
   ansible.builtin.command:
@@ -20,7 +20,7 @@
     cmd: "launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
   changed_when: true
   when:
-    - ansible_distribution_major_version | int < 13
+    - ansible_facts["distribution_major_version"] | int < 13
     - jenkins_swarm_client_disabled_pre_ventura not in disabled_services.stdout_lines
 
 - name: Disable launchctl service (post-Ventura)
@@ -28,5 +28,5 @@
     cmd: "launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
   changed_when: true
   when:
-    - ansible_distribution_major_version | int >= 13
+    - ansible_facts["distribution_major_version"] | int >= 13
     - jenkins_swarm_client_disabled_post_ventura not in disabled_services.stdout_lines
