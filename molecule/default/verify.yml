@@ -91,7 +91,7 @@
       ansible.builtin.set_fact:
         java_cmdline_expected_list:
           - "{{ java_pid.stdout }}"
-          - "{{ expected_java_ps_name }}"
+          - "jenkins-swarm-client: /usr/bin/java"
           - "-Djava.util.logging.config.file=/jenkins/logging.properties"
           - "-jar"
           - "/jenkins/swarm-client-3.27.jar"
