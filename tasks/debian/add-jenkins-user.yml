@@ -1,3 +1,4 @@
 ---
 - name: Include Unix-specific tasks to add Jenkins user
-  ansible.builtin.include_tasks: "unix/add-jenkins-user.yml"
+  ansible.builtin.include_tasks:
+    file: "unix/add-jenkins-user.yml"

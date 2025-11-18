@@ -1,6 +1,7 @@
 ---
 - name: Include platform-specific defaults
-  ansible.builtin.include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars:
+    file: "{{ role_path }}/vars/{{ ansible_facts['os_family'] | lower }}.yml"
 
 - name: Ensure Jenkins working directory exists
   ansible.windows.win_file:
