@@ -17,3 +17,9 @@
     cmd: "launchctl bootout gui/{{ uid.stdout }} {{ jenkins_swarm_client_launchd_plist }}"
   ignore_errors: true  # noqa ignore-errors
   changed_when: false
+
+- name: Disable launchctl service
+  ansible.builtin.command:
+    cmd: "launchctl disable gui/{{ uid.stdout }}/{{ jenkins_swarm_client_ident }}"
+  ignore_errors: true  # noqa ignore-errors
+  changed_when: false
