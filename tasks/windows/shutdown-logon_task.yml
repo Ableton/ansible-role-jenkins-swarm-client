@@ -8,3 +8,9 @@
     Stop-Process -Id {{ jenkins_swarm_pid.content | b64decode }}
   ignore_errors: true  # noqa ignore-errors
   when: swarm_client_service_running
+
+- name: Disable scheduled task
+  ansible.windows.win_shell: >
+    Disable-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'
+  ignore_errors: true  # noqa ignore-errors
+  when: swarm_client_service_running

@@ -3,6 +3,12 @@
   ansible.builtin.include_tasks:
     file: "check-if-running.yml"
 
+- name: Enable scheduled task
+  ansible.windows.win_shell: >
+    Enable-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'
+  ignore_errors: true  # noqa ignore-errors
+  when: not swarm_client_service_running
+
 - name: Manually run scheduled task for service
   ansible.windows.win_shell: >
     Start-ScheduledTask -TaskName '{{ jenkins_swarm_service_name }}'
