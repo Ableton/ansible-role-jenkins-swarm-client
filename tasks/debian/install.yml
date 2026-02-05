@@ -5,4 +5,4 @@
 
 - name: Install service
   ansible.builtin.include_tasks:
-    file: "install-{{ ansible_facts['service_mgr'] }}.yml"
+    file: "install-{{ ansible_service_mgr }}.yml"
