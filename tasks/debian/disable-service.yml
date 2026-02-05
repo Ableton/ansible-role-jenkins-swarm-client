@@ -1,4 +1,4 @@
 ---
 - name: Disable service
   ansible.builtin.include_tasks:
-    file: "disable-service-{{ ansible_facts['service_mgr'] }}.yml"
+    file: "disable-service-{{ ansible_service_mgr }}.yml"

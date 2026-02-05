@@ -1,4 +1,4 @@
 ---
 - name: Enable service
   ansible.builtin.include_tasks:
-    file: "enable-service-{{ ansible_facts['service_mgr'] }}.yml"
+    file: "enable-service-{{ ansible_service_mgr }}.yml"
