@@ -24,10 +24,10 @@
 - name: Initialize should_start_swarm_client fact
   ansible.builtin.set_fact:
     should_start_swarm_client: >
-      service_pid_file.content is not defined or swarm_client_running.rc != 0
+      {{ service_pid_file.content is not defined or swarm_client_running.rc != 0 }}
 
 - name: Start launchctl service
-  when: should_start_swarm_client | bool
+  when: should_start_swarm_client
   block:
     - name: Get UID for jenkins_config_owner user
       ansible.builtin.command:
