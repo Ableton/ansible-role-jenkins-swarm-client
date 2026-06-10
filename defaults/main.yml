@@ -53,7 +53,7 @@ swarm_client_create_user: true
 # Windows NSSM stderr log file
 swarm_client_nssm_stderr_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stderr.log"
 
-# Windows NSSM stdout lof file
+# Windows NSSM stdout log file
 swarm_client_nssm_stdout_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stdout.log"
 
 # When true, start the Swarm Client service at the end of this role. In some cases, it is
