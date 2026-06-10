@@ -66,3 +66,9 @@ swarm_client_start_service: true
 #   Note that this option may require you to configure Windows to automatically log in the
 #   `jenkins_config_owner` user.
 swarm_client_windows_start_type: "nssm"
+
+# Windows NSSM stderr lof file
+swarm_client_nssm_stderr_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stderr.log"
+
+# Windows NSSM stdout lof file
+swarm_client_nssm_stdout_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stdout.log"
