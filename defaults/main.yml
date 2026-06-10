@@ -67,7 +67,7 @@ swarm_client_start_service: true
 #   `jenkins_config_owner` user.
 swarm_client_windows_start_type: "nssm"
 
-# Windows NSSM stderr lof file
+# Windows NSSM stderr log file
 swarm_client_nssm_stderr_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stderr.log"
 
 # Windows NSSM stdout lof file
