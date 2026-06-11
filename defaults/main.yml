@@ -50,6 +50,12 @@ jenkins_user_password: ""
 # false, then this role assumes that the user and its corresponding group already exist.
 swarm_client_create_user: true
 
+# Windows NSSM stderr log file
+swarm_client_nssm_stderr_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stderr.log"
+
+# Windows NSSM stdout log file
+swarm_client_nssm_stdout_file: "{{ jenkins_swarm_home }}/jenkins-swarm-client.stdout.log"
+
 # When true, start the Swarm Client service at the end of this role. In some cases, it is
 # necessary *not* to start the service right away, in case additional work must be done on
 # the node before allowing it to run jobs. To start the service manually, you should do:
