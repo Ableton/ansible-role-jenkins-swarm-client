@@ -1,6 +1,10 @@
 ---
 - name: Enable SysVinit service
   become: true
+  changed_when:
+    - sysvinit_service_enabled.changed
+    - is_molecule is not defined
+  register: sysvinit_service_enabled
   ansible.builtin.sysvinit:
     name: "jenkins-swarm-client"
     enabled: true

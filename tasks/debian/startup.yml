@@ -1,4 +1,8 @@
 ---
+- name: Include tasks to enable service
+  ansible.builtin.include_tasks:
+    file: "enable-service-{{ ansible_service_mgr }}.yml"
+
 - name: Ensure service is started
   become: true
   ansible.builtin.service:

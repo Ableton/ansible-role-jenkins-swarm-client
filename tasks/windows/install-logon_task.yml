@@ -14,6 +14,7 @@
     author: "Created by Ansible"
     # 2 -> Compatible with Task Scheduler 2.0
     compatibility: 2
+    enabled: false
     # PT0S -> Infinite (never kill the task)
     execution_time_limit: "PT0S"
     logon_type: interactive_token
