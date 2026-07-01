@@ -3,6 +3,10 @@
   ansible.builtin.include_vars:
     file: "{{ role_path }}/vars/{{ ansible_facts['os_family'] | lower }}.yml"
 
+- name: Include tasks to enable service
+  ansible.builtin.include_tasks:
+    file: "tasks/windows/enable-service-{{ swarm_client_windows_start_type }}.yml"
+
 - name: Include task file for Windows service start type
   ansible.builtin.include_tasks:
     file: "tasks/windows/startup-{{ swarm_client_windows_start_type }}.yml"
