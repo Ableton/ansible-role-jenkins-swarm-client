@@ -13,5 +13,9 @@ platforms:
 provisioner:
   name: ansible
   log: true
+  inventory:
+    group_vars:
+      all:
+        is_molecule: true
 verifier:
   name: ansible
