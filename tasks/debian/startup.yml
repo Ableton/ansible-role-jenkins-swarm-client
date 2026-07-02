@@ -1,4 +1,8 @@
 ---
+- name: Include tasks to enable service
+  ansible.builtin.include_tasks:
+    file: "enable-service-{{ ansible_service_mgr }}.yml"
+
 - name: Ensure service is started
   become: true
   ansible.builtin.service:
@@ -9,6 +13,7 @@
     # resemble standalone hosts with SSH. Since OpenSSH has libsystemd as a dependency,
     # it will fool the service module into selecting systemd as the service backend.
     use: "{{ ansible_service_mgr }}"
-  # This is required or else molecule's idempotency test will fail. See:
-  # https://github.com/ansible-community/molecule/issues/2765
-  changed_when: false
+  changed_when:
+    - service_started.changed
+    - is_molecule is not defined
+  register: service_started

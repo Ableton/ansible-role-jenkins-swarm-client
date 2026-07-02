@@ -10,7 +10,7 @@
   become: true
   ansible.builtin.systemd:
     name: jenkins-swarm-client
-    enabled: true
+    enabled: false
     daemon_reload: true
     no_block: true
     state: stopped

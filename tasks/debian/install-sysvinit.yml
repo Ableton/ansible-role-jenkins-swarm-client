@@ -20,5 +20,5 @@
   when: generate_launcher_script is changed  # noqa no-handler
   ansible.builtin.sysvinit:
     name: "jenkins-swarm-client"
-    enabled: true
+    enabled: false
     state: stopped
