@@ -22,7 +22,7 @@ attrs==26.1.0
     #   referencing
 black==26.10.1
     # via ansible-lint
-bracex==3.0.1
+bracex==3.2.4
     # via wcmatch
 certifi==2026.10.19
     # via requests
@@ -141,7 +141,7 @@ urllib3==2.8.0
     # via
     #   docker
     #   requests
-wcmatch==11.0.1
+wcmatch==11.2
     # via
     #   ansible-lint
     #   molecule
